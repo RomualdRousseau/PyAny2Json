@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "pyany2json"
+version = "0.1.0"
+description = ""
+authors = ["Romuald Rousseau <romuald.rousseau@servier.com>"]
+readme = "README.md"
+packages = [{ include = "pyany2json" }]
+include = [{ path = "jars", format = ["sdist", "wheel"] }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+jpype1 = "^1.5.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
