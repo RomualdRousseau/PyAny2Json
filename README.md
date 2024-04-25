@@ -19,7 +19,7 @@ to prepare your data for training processes in a predictive and reproductible ma
 it offers a scalable and efficient means of managing semi-structured data, thereby expanding the toolkit of data services available
 to organizations.
 
-Visit our [full documentation](https://romualdrousseau.github.io/Any2Json-Documents/) and learn more about how it works, try our
+Visit our [full documentation](https://romualdrousseau.github.io/PyAny2Json/) and learn more about how it works, try our
 tutorials and find a full list of plugins and models.
 
 ## Getting Started
@@ -28,6 +28,7 @@ tutorials and find a full list of plugins and models.
 
 * Python 3.8.2 or above.
 * Pip 20.0.2 or above.
+* Poetry 1.7.1 or above.
 * Just 1.24.0 or above.
 
 ## Contribute

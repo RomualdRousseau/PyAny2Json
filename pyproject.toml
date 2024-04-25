@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "pyany2json"
 version = "0.1.0"
-description = ""
+description = "Python binding to Any2Json"
 authors = ["Romuald Rousseau <romuald.rousseau@servier.com>"]
 readme = "README.md"
 packages = [{ include = "pyany2json" }]
-include = [{ path = "jars", format = ["sdist", "wheel"] }]
+include = [{ path = "libs/*", format = ["sdist", "wheel"] }]
 
 [tool.poetry.dependencies]
 python = "^3.11"

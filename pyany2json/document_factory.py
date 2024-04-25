@@ -51,7 +51,34 @@ class OptionalTable:
         """Toto"""
 
 
+class TableGraph:
+
+    def getTable(self) -> Table:
+        """Toto"""
+
+    def isRoot(self) -> bool:
+        """Toto"""
+
+    def getParent(self) -> TableGraph:
+        """Toto"""
+
+    def children() -> list[TableGraph]:
+        """Toto"""
+
+
+class OptionalTableGraph:
+
+    def isPresent(self) -> bool:
+        """Toto"""
+
+    def get(self) -> TableGraph:
+        """Toto"""
+
+
 class Sheet:
+    def getTableGraph(self) -> OptionalTableGraph:
+        """Toto"""
+
     def getTable(self) -> OptionalTable:
         """Toto"""
 
@@ -65,10 +92,10 @@ class Document:
 
     def setRecipe(recipe: str) -> Document:
         """Toto"""
-    
+
     def getTagClassifier() -> TagClassifier:
         """Toto"""
-        
+
     def sheets(self) -> list[Sheet]:
         """Toto"""
 
