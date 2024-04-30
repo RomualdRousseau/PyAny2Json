@@ -26,6 +26,7 @@ tutorials and find a full list of plugins and models.
 
 ### Dependencies
 
+* The Java Developer Kit, version 17.
 * Python 3.8.2 or above.
 * Pip 20.0.2 or above.
 * Poetry 1.7.1 or above.
@@ -37,7 +38,11 @@ Run the following command line:
 
 ```bash
 pip install pyany2json
+```
 
+Before to use the package, you need to download the jars in your project. Run the following command line:
+
+```bash
 python pyany2json/setup.py
 ```
 
