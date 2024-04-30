@@ -89,14 +89,14 @@ following depedencies are required to run the code of this tutorial:
 ## Load base model
 
 To parse a document, any2Json needs a model that will contains the parameters required to the parsing. Instead to start
-from an empty Model (See [Tutorial 8](tutorial_8.md)), we will start from an existing one and we will adapt it for our
+from an empty Model (See [Tutorial 10](tutorial_10.md)), we will start from an existing one and we will adapt it for our
 document. You can find a list and details of all models [here](https://github.com/RomualdRousseau/Any2Json-Models/).
 
 The base model, we will use, is "sales-english" that has been trained on 200+ english documents containing distributor
 data and with a large range of different layouts.
 
 The base model already recognize some entities such as DATE and NUMBER. We will configure a layex to extract the
-different elements of the documents. You can find more details about layex [here](white_papers.md).
+different elements of the documents. You can find more details about layex.
 
 ```java
 final var model = Common.loadModelFromGitHub("sales-english");
