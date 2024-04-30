@@ -31,6 +31,23 @@ tutorials and find a full list of plugins and models.
 * Poetry 1.7.1 or above.
 * Just 1.24.0 or above.
 
+### Install and setup locally
+
+Run the following command line:
+
+```bash
+pip install pyany2json
+
+python pyany2json/setup.py
+```
+
+### Documentation
+
+The following links will give you documentation about some background information, takes you through some implementation details,
+and then focuses on step-by-step instructions for getting the most out of Any2Json:
+
+* Using PyAny2Json: [here](https://romualdrousseau.github.io/PyAny2Json/).
+
 ## Contribute
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
@@ -43,5 +60,6 @@ Please make sure to update tests as appropriate.
 
 ## Version History
 
+* 0.1.1
 * 0.1.0
 * Initial Release
