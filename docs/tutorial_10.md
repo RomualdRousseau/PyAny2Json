@@ -1,8 +1,8 @@
-# Tutorial 8 - Data extraction from paginated PDF
+# Tutorial 10 - Make a classifier from scratch
 
 [View source on GitHub](https://github.com/RomualdRousseau/Any2Json-Examples).
 
-This tutoral is a continuation of the [Tutorial 7](tutorial_7.md).
+This tutoral is a continuation of the [Tutorial 9](tutorial_9.md).
 
 ***Coming soon***
 

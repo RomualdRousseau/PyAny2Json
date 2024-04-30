@@ -3,6 +3,7 @@ from .model import *
 
 from com.github.romualdrousseau.any2json import DocumentFactory as DocumentFactory_  # type: ignore
 from com.github.romualdrousseau.any2json import Document as Document_  # type: ignore
+from com.github.romualdrousseau.any2json.base import DataTable as DataTable  # type: ignore
 
 INTELLI_LAYOUT = Document_.Hint.INTELLI_LAYOUT
 INTELLI_TAG = Document_.Hint.INTELLI_TAG
@@ -39,6 +40,33 @@ class Table:
         """Toto"""
 
     def rows(self) -> list[Row]:
+        """Toto"""
+
+    def getSheet(self) -> Sheet:
+        """Toto"""
+
+    def getNumberOfColumns(self) -> int:
+        """Toto"""
+
+    def getNumberOfRows(self) -> int:
+        """Toto"""
+
+    def getRowAt(self, rowIndex) -> Row:
+        """Toto"""
+
+    def getNumberOfHeaders(self) -> int:
+        """Toto"""
+
+    def getHeaderNames(self) -> list[str]:
+        """Toto"""
+
+    def getHeaderAt(self, i) -> Header:
+        """Toto"""
+
+    def getNumberOfHeaderTags(self) -> int:
+        """Toto"""
+
+    def headerTags(self) -> list[Header]:
         """Toto"""
 
 

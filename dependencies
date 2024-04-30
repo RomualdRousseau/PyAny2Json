@@ -33,12 +33,12 @@ com.github.romualdrousseau:shuju-jackson:jar:1.23
 com.fasterxml.jackson.core:jackson-databind:jar:2.15.2
 com.fasterxml.jackson.core:jackson-annotations:jar:2.15.2
 com.fasterxml.jackson.core:jackson-core:jar:2.15.2
-com.github.romualdrousseau:any2json:jar:20240422.102355-9:2.38-SNAPSHOT
+com.github.romualdrousseau:any2json:jar:2.38
 org.python:jython-standalone:jar:2.7.3
-com.github.romualdrousseau:any2json-layex-parser:jar:20240314.021346-4:2.38-SNAPSHOT
-com.github.romualdrousseau:any2json-net-classifier:jar:20240314.021330-4:2.38-SNAPSHOT
-com.github.romualdrousseau:any2json-csv:jar:20240314.021455-2:2.38-SNAPSHOT
-com.github.romualdrousseau:any2json-excel:jar:20240314.021620-3:2.38-SNAPSHOT
+com.github.romualdrousseau:any2json-layex-parser:jar:2.38
+com.github.romualdrousseau:any2json-net-classifier:jar:2.38
+com.github.romualdrousseau:any2json-csv:jar:2.38
+com.github.romualdrousseau:any2json-excel:jar:2.38
 org.apache.poi:poi:jar:5.2.3
 commons-codec:commons-codec:jar:1.15
 org.apache.commons:commons-collections4:jar:4.4
@@ -51,7 +51,7 @@ org.apache.xmlbeans:xmlbeans:jar:5.1.1
 org.apache.commons:commons-compress:jar:1.21
 com.github.virtuald:curvesapi:jar:1.07
 org.apache.poi:poi-scratchpad:jar:5.2.3
-com.github.romualdrousseau:any2json-pdf:jar:20240419.045004-6:2.38-SNAPSHOT
+com.github.romualdrousseau:any2json-pdf:jar:2.38
 technology.tabula:tabula:jar:1.0.5
 org.locationtech.jts:jts-core:jar:1.18.1
 org.slf4j:slf4j-simple:jar:1.7.32
