@@ -46,6 +46,14 @@ Before to use the package, you need to download the jars in your project. Run th
 python pyany2json/setup.py
 ```
 
+### Run the examples
+
+To run the tutorial1:
+
+```bash
+python examples/tutorial1.py
+```
+
 ### Documentation
 
 The following links will give you documentation about some background information, takes you through some implementation details,
