@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyany2json"
-version = "0.1.1"
+version = "0.1.2"
 description = "Python binding to Any2Json"
 authors = ["Romuald Rousseau <romuald.rousseau@servier.com>"]
 readme = "README.md"
