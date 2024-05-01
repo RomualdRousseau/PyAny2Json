@@ -6,7 +6,6 @@ LIB_PATH = "libs"
 JAR_PATH = "jars"
 MAVEN_URL = "https://oss.sonatype.org/content/repositories/releases"
 MAVEN_SNAPSHOT_URL = "https://oss.sonatype.org/content/repositories/snapshots"
-DEPENDENCIES = ["com.github.romualdrousseau:shuju:jar:1.23"]
 
 jpype.startJVM(classpath=[f"{JAR_PATH}/*", f"{LIB_PATH}/*"])
 
