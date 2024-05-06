@@ -24,6 +24,9 @@ class ModelBuilder:
     def __init__(self):
         """createInstance"""
         
+    def fromPath(self, path: str) -> ModelBuilder:
+        """Toto"""
+        
     def fromURI(self, uri: str) -> ModelBuilder:
         """Toto"""
         
@@ -43,6 +46,9 @@ class ModelBuilder:
         """Toto"""
 
     def setTableParser(self, parser: TableParser) -> ModelBuilder:
+        """Toto"""
+        
+    def setTagClassifier(self, tagger: TagClassifier) -> ModelBuilder:
         """Toto"""
 
     def build(self) -> Model:

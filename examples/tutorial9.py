@@ -1,5 +1,4 @@
-from pyany2json import ModelBuilder, LayexTableParser, DocumentFactory, INTELLI_LAYOUT
-from pyany2json.document_factory import DataTable, TableGraph
+import pyany2json
 
 
 REPO_BASE_URL = "https://raw.githubusercontent.com/RomualdRousseau/Any2Json-Models/main"
@@ -8,19 +7,18 @@ FILE_PATH = "data/AG120-N-074.pdf"
 FILE_ENCODING = "UTF-8"
 
 
-builder = ModelBuilder().fromURI("{0}/{1}/{1}.json".format(REPO_BASE_URL, MODEL_NAME))
-parser = LayexTableParser(
+builder = pyany2json.model_from_uri(f"{REPO_BASE_URL}/{MODEL_NAME}/{MODEL_NAME}.json")
+
+parser = pyany2json.LayexTableParser(
     [""], ["((vv$)(v+$v+$))(()(.+$)())+()", "(()(.+$))(()(.+$)())+()"]
 )
-model = (
-    builder.setTableParser(parser)
-    .build()
-)
 
-def visitTable(parent: TableGraph):
+model = builder.setTableParser(parser).build()
+
+def visitTable(parent: pyany2json.TableGraph):
     for c in parent.children():
         table = c.getTable()
-        if isinstance(table, DataTable):
+        if isinstance(table, pyany2json.DataTable):
             for header in table.headers():
                 print(header.getName(), end=" ")
             print()
@@ -31,9 +29,12 @@ def visitTable(parent: TableGraph):
         if len(c.children()) > 0:
             visitTable(c)
         
-with DocumentFactory.createInstance(FILE_PATH, FILE_ENCODING) as doc:
-    doc.setModel(model)
-    doc.setHints([INTELLI_LAYOUT])
+with pyany2json.load(
+    FILE_PATH,
+    encoding=FILE_ENCODING,
+    model=model,
+    hints=[pyany2json.INTELLI_LAYOUT],
+) as doc:
     for sheet in doc.sheets():
         root = sheet.getTableGraph()
         if root.isPresent():

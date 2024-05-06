@@ -1,8 +1,8 @@
 # Tutorial 1 - Getting Started
 
-[View source on GitHub](https://github.com/RomualdRousseau/Any2Json-Examples).
+[View source on GitHub](https://github.com/RomualdRousseau/PyAny2Json).
 
-This short introduction uses [Any2Json](https://github.com/RomualdRousseau/Any2Json) to:
+This short introduction uses [Any2Json](https://github.com/RomualdRousseau/PyAny2Json) to:
 
 1. Load simple tabular documents in CSV and Exce formats.
 2. Display the tabular result on the console.
@@ -11,164 +11,96 @@ The expected layout of each document is a single header row followed by rows of 
 
 ![document with simple table](images/tutorial1_data.png)
 
-## Setup Any2Json
+## Setup PyAny2Json
+
+Before to use the package, you need to download the jars in your project. Run the following command line at the root of
+your python project:
+
+```bash
+python pyany2json/setup.py
+```
 
 ### Import the packages and setup the main class:
 
-```java
-package com.github.romualdrousseau.any2json.examples;
-
-import java.util.EnumSet;
-import java.util.List;
-
-import com.github.romualdrousseau.any2json.Document;
-import com.github.romualdrousseau.any2json.DocumentFactory;
-import com.github.romualdrousseau.any2json.parser.LayexTableParser;
-
-public class Tutorial1 implements Runnable {
-
-    public Tutorial1() {
-    }
-
-    @Override
-    public void run() {
-        // Code will come here
-    }
-
-    public static void main(final String[] args) {
-        new Tutorial1().run();
-    }
-}
-```
-
-### pom.xml
-
-Any2Json has a very modular design. Each module has to be loaded explicitely. The following modules are
-required to run the code of this tutorial:
-
-```xml
-<!-- ShuJu Framework -->
-<dependency>
-    <groupId>com.github.romualdrousseau</groupId>
-    <artifactId>shuju</artifactId>
-    <version>${shuju.version}</version>
-</dependency>
-<dependency>
-    <groupId>com.github.romualdrousseau</groupId>
-    <artifactId>shuju-jackson</artifactId>
-    <version>${shuju.version}</version>
-</dependency>
-<!-- Any2Json Framework -->
-<dependency>
-    <groupId>com.github.romualdrousseau</groupId>
-    <artifactId>any2json</artifactId>
-    <version>${any2json.version}</version>
-</dependency>
-<dependency>
-    <groupId>com.github.romualdrousseau</groupId>
-    <artifactId>any2json-csv</artifactId>
-    <version>${any2json.version}</version>
-</dependency>
-<dependency>
-    <groupId>com.github.romualdrousseau</groupId>
-    <artifactId>any2json-excel</artifactId>
-    <version>${any2json.version}</version>
-</dependency>
+```python
+import pyany2json
 ```
 
 ## Minimal code
 
 The minimal code to load a document is as follow:
 
-```java
-final var file = Common.loadData(f, this.getClass());
-try (final var doc = DocumentFactory.createInstance(file, "UTF-8")) {
-    doc.sheets().forEach(s -> s.getTable().ifPresent(t -> {
-        doSomethingWithHeaders(t.headers());
-        doSomethingWithRows(t.rows());
-    }));
-}
+```python
+with pyany2json.load(file_path, encoding="UTF-8") as doc:
+    for sheet in doc.sheets():
+        table = sheet.getTable()
+        if table.isPresent():
+            table = table.get()
+            doSomethingWithHeaders(table.headers())
+            doSomethingWithRows(table.rows())
 ```
 
 The encoding ("UTF-8" here) is used if the encoding could not be detected when loading the document.
 
 ### Iterate overs the headers:
 
-```java
-headers.forEach(h -> {
-    // Do something with the header
-});
+```python
+for header in table.headers():
+    # Do something with the header
 ```
 
 ### Iterate over the rows and cells:
 
-```java
-rows.forEach(r -> {
-    r.cells().forEach(c -> {
-        // Do something with the cell
-    });
-});
+```python
+for row in table.rows():
+    for cell in row.cells():
+        # Do something with the cell
 ```
 
 ## Load several file formats
 
 Here is a complete example to load and print the content of different CSV and Excel files:
 
-```java
-package com.github.romualdrousseau.any2json.examples;
+```python
+import pyany2json
 
-import java.util.List;
+FILE_PATHS = [
+    "data/document with simple table.csv",
+    "data/document with simple table.xls",
+    "data/document with simple table.xlsx",
+]
 
-import com.github.romualdrousseau.any2json.DocumentFactory;
-
-public class Tutorial1 implements Runnable {
-
-    private static List<String> FILES = List.of(
-            "document with simple table.csv",
-            "document with simple table.xls",
-            "document with simple table.xlsx");
-
-    public Tutorial1() {
-    }
-
-    @Override
-    public void run() {
-        FILES.forEach(f -> {
-            final var file = Common.loadData(f, this.getClass());
-            try (final var doc = DocumentFactory.createInstance(file, "UTF-8")) {
-                doc.sheets().forEach(s -> s.getTable().ifPresent(t -> {
-                    Common.printHeaders(t.headers());
-                    Common.printRows(t.rows());
-                }));
-            }
-        });
-    }
-
-    public static void main(final String[] args) {
-        new Tutorial1().run();
-    }
-}
+for file_path in FILE_PATHS:
+    with pyany2json.load(file_path) as doc:
+        for sheet in doc.sheets():
+            table = sheet.getTable()
+            if table.isPresent():
+                table = table.get()
+                for header in table.headers():
+                    print(header.getTag().getValue(), end=" ")
+                print()
+                for row in table.rows():
+                    for cell in row.cells():
+                        print(cell.getValue(), end=" ")
+                    print()
 ```
 
 ```bash
-2024-03-09 18:40:23 INFO  Common:37 - Loaded resource: /data/document with simple table.csv
-            Date                  Client                     Qty                  Amount
-      2023/02/01                     AAA                       1                     100
-      2023/02/01                     BBB                       1                     100
-      2023/02/01                     BBB                       3                     300
-      2023/02/01                     AAA                       1                     100
-2024-03-09 18:40:24 INFO  Common:37 - Loaded resource: /data/document with simple table.xls
-            Date                  Client                     Qty                  Amount                        
-      2023-02-01                     AAA                       1                     100                        
-      2023-02-01                     BBB                       1                     100                        
-      2023-02-01                     BBB                       3                     300                        
-      2023-02-01                     AAA                       1                     100                        
-2024-03-09 18:40:24 INFO  Common:37 - Loaded resource: /data/document with simple table.xlsx
-            Date                  Client                     Qty                  Amount
-      2023-02-01                     AAA                       1                     100
-      2023-02-01                     BBB                       1                     100
-      2023-02-01                     BBB                       3                     300
-      2023-02-01                     AAA                       1                     100
+date client qty amount 
+2023/02/01 AAA 1 100 
+2023/02/01 BBB 1 100 
+2023/02/01 BBB 3 300 
+2023/02/01 AAA 1 100 
+date client qty amount none 
+2023-02-01 AAA 1 100  
+2023-02-01 BBB 1 100  
+2023-02-01 BBB 3 300  
+2023-02-01 AAA 1 100  
+date client qty amount 
+2023-02-01 AAA 1 100 
+2023-02-01 BBB 1 100 
+2023-02-01 BBB 3 300 
+2023-02-01 AAA 1 100
 ```
 
 ## Conclusion

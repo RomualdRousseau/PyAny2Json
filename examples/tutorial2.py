@@ -1,4 +1,4 @@
-from pyany2json import ModelBuilder, LayexTableParser, DocumentFactory, INTELLI_LAYOUT
+import pyany2json
 
 REPO_BASE_URL = "https://raw.githubusercontent.com/RomualdRousseau/Any2Json-Models/main"
 MODEL_NAME = "sales-english"
@@ -6,26 +6,34 @@ FILE_PATH = "data/document with multiple tables.xlsx"
 FILE_ENCODING = "UTF-8"
 
 
-builder = ModelBuilder().fromURI("{0}/{1}/{1}.json".format(REPO_BASE_URL, MODEL_NAME))
-parser = LayexTableParser(["(v.$)+"], ["(()(S+$))(()([/^TOTAL/|v].+$)())+(/TOTAL/.+$)"])
-entities = builder.getEntityList()
-entities.append("PRODUCTNAME")
+builder = pyany2json.model_from_uri(f"{REPO_BASE_URL}/{MODEL_NAME}/{MODEL_NAME}.json")
+
 entities = [v for v in builder.getEntityList() if v != "PACKAGE"]
-patterns = builder.getPatternMap()
-patterns["\\D+\\dml"] = "PRODUCTNAME"
+entities.append("PRODUCTNAME")
+
 patterns = {k: v for (k, v) in builder.getPatternMap().items() if v != "PACKAGE"}
+patterns["\\D+\\dml"] = "PRODUCTNAME"
+
+parser = pyany2json.LayexTableParser(
+    ["(v.$)+"], ["(()(S+$))(()([/^TOTAL/|v].+$)())+(/TOTAL/.+$)"]
+)
+
 model = (
-    builder.setTableParser(parser)
-    .setEntityList(entities)
+    builder.setEntityList(entities)
     .setPatternMap(patterns)
+    .setTableParser(parser)
     .build()
 )
 
-with DocumentFactory.createInstance(FILE_PATH, FILE_ENCODING) as doc:
-    doc.setModel(model)
-    doc.setHints([INTELLI_LAYOUT])
-    doc.setRecipe("sheet.setCapillarityThreshold(0)")
-    doc.getTagClassifier().setSnakeMode(True)
+
+with pyany2json.load(
+    FILE_PATH,
+    encoding=FILE_ENCODING,
+    model=model,
+    hints=[pyany2json.INTELLI_LAYOUT],
+    recipe=["sheet.setCapillarityThreshold(0)"],
+    tag_case="SNAKE"
+) as doc:
     for sheet in doc.sheets():
         table = sheet.getTable()
         if table.isPresent():
