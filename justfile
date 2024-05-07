@@ -10,8 +10,10 @@ build:
     poetry build
     mkdocs build
     
-deploy:
-    poetry publish --username __token__ --password $POETRY_PYPI_TOKEN --skip-existing 
+deploy: deploy-doc
+    poetry publish --username __token__ --password $POETRY_PYPI_TOKEN --skip-existing
+
+deploy-doc:
     mkdocs gh-deploy
 
 serve-doc:
