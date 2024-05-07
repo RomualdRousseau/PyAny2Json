@@ -20,7 +20,7 @@ your python project:
 python pyany2json/setup.py
 ```
 
-### Import the packages and setup the main class:
+### Import the package:
 
 ```python
 import pyany2json

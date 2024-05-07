@@ -1,82 +1,43 @@
 # Tutorial 2 - Data extraction with a complex semi-structured layout
 
-[View source on GitHub](https://github.com/RomualdRousseau/Any2Json-Examples).
+[View source on GitHub](https://github.com/RomualdRousseau/PyAny2Json).
 
-This tutorial will demonstrate how to use [Any2Json](https://github.com/RomualdRousseau/Any2Json) to extract data from
+This tutorial will demonstrate how to use [Any2Json](https://github.com/RomualdRousseau/PyAny2Json) to extract data from
 one Excel spreadsheet. To demonstrate the usage of this framework, we will load a document with a somewhat complex
 layout, as seen here:
 
 ![document with multiple tables](images/tutorial2_data.png)
 
-## Setup Any2Json
+## Setup PyAny2Json
 
-### Import the packages and setup the main class:
+Before to use the package, you need to download the jars in your project. Run the following command line at the root of
+your python project:
 
-```java
-package com.github.romualdrousseau.any2json.examples;
-
-import java.util.EnumSet;
-import java.util.List;
-
-import com.github.romualdrousseau.any2json.Document;
-import com.github.romualdrousseau.any2json.DocumentFactory;
-import com.github.romualdrousseau.any2json.parser.LayexTableParser;
-
-public class Tutorial2 implements Runnable {
-
-    public Tutorial2() {
-    }
-
-    @Override
-    public void run() {
-        // Code will come here
-    }
-
-    public static void main(final String[] args) {
-        new Tutorial2().run();
-    }
-}
+```bash
+python pyany2json/setup.py
 ```
 
-### pom.xml
+### Import the package:
 
-Any2Json has a very modular design where each functionality can be loaded separatly. We add the "any2json-layex-parser"
-module to enable the intelligent layout parsing. The following depedencies are required to run the code of this tutorial:
-
-```xml
-<!-- ShuJu Framework -->
-<dependency>
-    <groupId>com.github.romualdrousseau</groupId>
-    <artifactId>shuju</artifactId>
-    <version>${shuju.version}</version>
-</dependency>
-<dependency>
-    <groupId>com.github.romualdrousseau</groupId>
-    <artifactId>shuju-jackson</artifactId>
-    <version>${shuju.version}</version>
-</dependency>
-<!-- Any2Json Framework -->
-<dependency>
-    <groupId>com.github.romualdrousseau</groupId>
-    <artifactId>any2json</artifactId>
-    <version>${any2json.version}</version>
-</dependency>
-<dependency>
-    <groupId>com.github.romualdrousseau</groupId>
-    <artifactId>any2json-layex-parser</artifactId>
-    <version>${any2json.version}</version>
-</dependency>
-<dependency>
-    <groupId>com.github.romualdrousseau</groupId>
-    <artifactId>any2json-csv</artifactId>
-    <version>${any2json.version}</version>
-</dependency>
-<dependency>
-    <groupId>com.github.romualdrousseau</groupId>
-    <artifactId>any2json-excel</artifactId>
-    <version>${any2json.version}</version>
-</dependency>
+```python
+import pyany2json
 ```
+
+## Minimal code
+
+The minimal code to load a document is as follow:
+
+```python
+with pyany2json.load(file_path, encoding="UTF-8") as doc:
+    for sheet in doc.sheets():
+        table = sheet.getTable()
+        if table.isPresent():
+            table = table.get()
+            doSomethingWithHeaders(table.headers())
+            doSomethingWithRows(table.rows())
+```
+
+The encoding ("UTF-8" here) is used if the encoding could not be detected when loading the document.
 
 ## Load base model
 
@@ -92,80 +53,83 @@ PRODUCTNAME and we will configure a layex to extract the different elements of t
 about layex.
 
 
-```java
-final var model = Common.loadModelFromGitHub("sales-english");
+```python
+REPO_BASE_URL = "https://raw.githubusercontent.com/RomualdRousseau/Any2Json-Models/main"
+MODEL_NAME = "sales-english"
+FILE_PATH = "data/document with multiple tables.xlsx"
+FILE_ENCODING = "UTF-8"
 
-// Add product name entity to the model
 
-model.getEntityList().add("PRODUCTNAME");
-model.getPatternMap().put("\\D+\\dml", "PRODUCTNAME");
-model.update();
+builder = pyany2json.model_from_uri(f"{REPO_BASE_URL}/{MODEL_NAME}/{MODEL_NAME}.json")
 
-// Add a layex to the model
+entities = [v for v in builder.getEntityList() if v != "PACKAGE"]
+entities.append("PRODUCTNAME")
 
-final var tableParser = new LayexTableParser(
-        List.of("(v.$)+"),
-        List.of("(()(S+$))(()([/^TOTAL/|v].+$)())+(/TOTAL/.+$)"));
-model.registerTableParser(tableParser);
+patterns = {k: v for (k, v) in builder.getPatternMap().items() if v != "PACKAGE"}
+patterns["\\D+\\dml"] = "PRODUCTNAME"
+
+parser = pyany2json.LayexTableParser(
+    ["(v.$)+"], ["(()(S+$))(()([/^TOTAL/|v].+$)())+(/TOTAL/.+$)"]
+)
+
+model = (
+    builder.setEntityList(entities)
+    .setPatternMap(patterns)
+    .setTableParser(parser)
+    .build()
+)
 ```
 
 ### Load the document
 
 We load the document by creating a document instance with the model and options to parse the document. The hint
-"Document.Hint.INTELLI_LAYOUT" will tell the document instance that the document has a complex layout. The recipe
-"sheet.setCapillarityThreshold(0)" will tell the parser engine to extract the features as ***small*** as possible:
+"pyany2json.INTELLI_LAYOUT" will tell the document instance that the document has a complex layout. The recipe
+"sheet.setCapillarityThreshold(0)" will tell the parser engine to extract the features as ***small*** as possible. And finally we want the tag case to be in snake case notation:
 
-```java
-final var file = Common.loadData("document with multiple tables.xlsx", this.getClass());
-try (final var doc = DocumentFactory.createInstance(file, "UTF-8")
-        .setModel(model)
-        .setHints(EnumSet.of(Document.Hint.INTELLI_LAYOUT))
-        .setRecipe("sheet.setCapillarityThreshold(0)")) {
+```python
+with pyany2json.load(
+    FILE_PATH,
+    encoding=FILE_ENCODING,
+    model=model,
+    hints=[pyany2json.INTELLI_LAYOUT],
+    recipe=["sheet.setCapillarityThreshold(0)"],
+    tag_case="SNAKE"
+) as doc:
     ...
-}
 ```
 
 ### Output the tabular result
 
 Finally, we iterate over the sheets, rows and cells and outpout the data on the console:
 
-```java
-doc.sheets().forEach(s -> Common.addSheetDebugger(s).getTable().ifPresent(t -> {
-    Common.printHeaders(t.headers());
-    Common.printRows(t.rows());
-}));
+```python
+    for sheet in doc.sheets():
+        table = sheet.getTable()
+        if table.isPresent():
+            table = table.get()
+            for header in table.headers():
+                print(header.getTag().getValue(), end=" ")
+            print()
+            for row in table.rows():
+                for cell in row.cells():
+                    print(cell.getValue(), end=" ")
+                print()
 ```
 
 ```bash
-2024-03-09 18:58:41 INFO  Common:37 - Loaded resource: /models/sales-english.json
-2024-03-09 18:58:41 INFO  Common:37 - Loaded resource: /data/document with multiple tables.xlsx
-2024-03-09 18:58:43 DEBUG Common:59 - Extracting features ...
-2024-03-09 18:58:43 DEBUG Common:63 - Generating Layout Graph ...
-2024-03-09 18:58:43 DEBUG Common:67 - Assembling Tabular Output ...
-============================== DUMP GRAPH ===============================
-Sheet1
-|- A document very important DATE META(1, 1, 4, 1, 1, 1)
-|- |- PRODUCTNAME META(1, 4, 1, 4, 1, 1)
-|- |- |- Date Client Qty Amount DATA(1, 5, 4, 10, 6, 4) (1)
-|- |- PRODUCTNAME META(1, 11, 1, 11, 1, 1)
-|- |- |- Date Client Qty Amount DATA(1, 12, 4, 17, 6, 4) (2)
-|- |- PRODUCTNAME META(1, 18, 1, 18, 1, 1)
-|- |- |- Date Client Qty Amount DATA(1, 19, 4, 24, 6, 4) (3)
-================================== END ==================================
-2024-03-09 18:58:43 DEBUG Common:72 - Done.
-A document very                     DATE             PRODUCTNAME                  Client                     Qty                  Amount
-A document very               2023-02-01             Product 1ml                     AAA                       1                     100
-A document very               2023-02-01             Product 1ml                     BBB                       1                     100
-A document very               2023-02-01             Product 1ml                     BBB                       3                     300
-A document very               2023-02-01             Product 1ml                     AAA                       1                     100
-A document very               2023-02-01             Product 2ml                     AAA                       1                     100
-A document very               2023-02-01             Product 2ml                     BBB                       2                     200
-A document very               2023-02-01             Product 2ml                     CCC                       4                     400
-A document very               2023-02-01             Product 2ml                     DDD                       1                     100
-A document very               2023-02-01             Product 3ml                     AAA                       1                     100
-A document very               2023-02-01             Product 3ml                     CCC                       1                     100
-A document very               2023-02-01             Product 3ml                     AAA                       1                     100
-A document very               2023-02-01             Product 3ml                     DDD                       1                     100
+a_document_very_important date product_name invoice_date client quantity amount 
+A document very important 2023-02-01 Product 1ml 2023-02-01 AAA 1 100 
+A document very important 2023-02-01 Product 1ml 2023-02-01 BBB 1 100 
+A document very important 2023-02-01 Product 1ml 2023-02-01 BBB 3 300 
+A document very important 2023-02-01 Product 1ml 2023-02-01 AAA 1 100 
+A document very important 2023-02-01 Product 2ml 2023-02-01 AAA 1 100 
+A document very important 2023-02-01 Product 2ml 2023-02-01 BBB 2 200 
+A document very important 2023-02-01 Product 2ml 2023-02-01 CCC 4 400 
+A document very important 2023-02-01 Product 2ml 2023-02-01 DDD 1 100 
+A document very important 2023-02-01 Product 3ml 2023-02-01 AAA 1 100 
+A document very important 2023-02-01 Product 3ml 2023-02-01 CCC 1 100 
+A document very important 2023-02-01 Product 3ml 2023-02-01 AAA 1 100 
+A document very important 2023-02-01 Product 3ml 2023-02-01 DDD 1 100 
 ```
 
 On this output, we print out the graph of the document built during the parsing and we can see clearly the relation
