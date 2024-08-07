@@ -1,7 +1,16 @@
-from .setup import *
-from .types import *
-from .document_factory import *
-from .layex_table_parser import *
+from .setup import *  # noqa: F403
+from .types import *  # noqa: F403
+from .layex_table_parser import *  # noqa: F403
+
+from .document_factory import (
+    DocumentFactory,
+    TableGraph,  # noqa: F401
+    DataTable,  # noqa: F401
+    INTELLI_EXTRACT,  # noqa: F401
+    INTELLI_LAYOUT,  # noqa: F401
+    INTELLI_TAG,  # noqa: F401
+)
+from .model import Model, ModelBuilder
 
 
 def model_from_path(path: str):

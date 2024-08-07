@@ -1,4 +1,4 @@
-from .model import *
+from .model import TableParser
 
 from com.github.romualdrousseau.any2json.parser import LayexTableParser as LayexTableParser_  # type: ignore
 
@@ -8,4 +8,4 @@ class LayexTableParser(TableParser):
         """createInstance"""
 
 
-LayexTableParser = LayexTableParser_
+LayexTableParser = LayexTableParser_  # noqa: F811
