@@ -32,7 +32,7 @@ with pyany2json.load(
     model=model,
     hints=[pyany2json.INTELLI_LAYOUT],
     recipe=["sheet.setCapillarityThreshold(0)"],
-    tag_case="SNAKE"
+    tag_case="SNAKE",
 ) as doc:
     for sheet in doc.sheets():
         table = sheet.getTable()

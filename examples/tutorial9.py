@@ -15,6 +15,7 @@ parser = pyany2json.LayexTableParser(
 
 model = builder.setTableParser(parser).build()
 
+
 def visitTable(parent: pyany2json.TableGraph):
     for c in parent.children():
         table = c.getTable()
@@ -28,7 +29,8 @@ def visitTable(parent: pyany2json.TableGraph):
                 print()
         if len(c.children()) > 0:
             visitTable(c)
-        
+
+
 with pyany2json.load(
     FILE_PATH,
     encoding=FILE_ENCODING,

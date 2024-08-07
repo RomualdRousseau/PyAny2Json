@@ -1,8 +1,7 @@
 import jpype
 import jpype.imports
 
-from java.nio.file import Path as Path_  # type: ignore
-from java.nio.file import Paths as Paths_  # type: ignore 
+from java.nio.file import Paths as Paths_  # type: ignore
 from java.util import List as List_  # type: ignore
 from java.util import EnumSet as EnumSet_  # type: ignore
 from com.github.romualdrousseau.shuju.json import JSON as JSON_  # type: ignore
