@@ -15,9 +15,6 @@ from pyarchery.archery import (
     Header as JHeader,
 )
 from pyarchery.archery import (
-    OptionalTable as JOptionalTable,
-)
-from pyarchery.archery import (
     Row as JRow,
 )
 from pyarchery.archery import (
@@ -25,6 +22,9 @@ from pyarchery.archery import (
 )
 from pyarchery.archery import (
     Table as JTable,
+)
+from pyarchery.archery import (
+    TableGraph as JTableGraph,
 )
 
 
@@ -124,9 +124,15 @@ class SheetWrapper:
 
     @property
     def table(self) -> Optional[TableWrapper]:
-        opt_table: JOptionalTable = self._sheet.getTable()
+        opt_table = self._sheet.getTable()
         if opt_table.isPresent():
             return TableWrapper(opt_table.get())
+        return None
+
+    def get_table_graph(self) -> Optional[JTableGraph]:
+        opt_table_graph = self._sheet.getTableGraph()
+        if opt_table_graph.isPresent():
+            return opt_table_graph.get()
         return None
 
     def add_sheet_listener(self, listener):

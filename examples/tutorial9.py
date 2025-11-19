@@ -16,14 +16,14 @@ def get_model():
 
 def visit_table(parent: pyarchery.TableGraph):
     for c in parent.children():
-        table = c.table
+        table = c.getTable()
         if isinstance(table, pyarchery.DataTable):
-            for header in table.headers:
-                print(header.tag_value, end=" ")
+            for header in table.headers():
+                print(header.getValue(), end=" ")
             print()
-            for row in table.rows:
-                for cell in row.cells:
-                    print(cell.value, end=" ")
+            for row in table.rows():
+                for cell in row.cells():
+                    print(cell.getValue(), end=" ")
                 print()
         if len(c.children()) > 0:
             visit_table(c)
@@ -36,6 +36,6 @@ with pyarchery.load(
     hints=[pyarchery.INTELLI_LAYOUT],
 ) as doc:
     for sheet in doc.sheets:
-        root = sheet.table_graph
+        root = sheet.get_table_graph()
         if root:
             visit_table(root)

@@ -1,4 +1,4 @@
-APP_NAME := "app"
+APP_NAME := "pyarchery"
 
 # Default recipe to display help
 default:
@@ -18,7 +18,7 @@ update:
 
 # Run the application
 run *args:
-    uv run {{APP_NAME}} {{args}}
+    uv run python examples/{{args}}
 
 # Run tests
 test:

@@ -18,10 +18,12 @@ from pyarchery.archery import (
     INTELLI_TAG,
     INTELLI_TIME,
     SNAKE,
+    DataTable,
     DocumentFactory,
     LayexTableParser,
     Model,
     ModelBuilder,
+    TableGraph,
 )
 from pyarchery.wrappers import DocumentWrapper
 
