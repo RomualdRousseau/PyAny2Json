@@ -1,4 +1,4 @@
-# ruff: noqa: F401, F403, E402
+# ruff: noqa: F401, E402
 
 import jpype
 import jpype.imports
