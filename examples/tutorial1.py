@@ -1,4 +1,4 @@
-import pyany2json
+import pyarchery
 
 FILE_PATHS = [
     "data/document with simple table.csv",
@@ -7,15 +7,14 @@ FILE_PATHS = [
 ]
 
 for file_path in FILE_PATHS:
-    with pyany2json.load(file_path) as doc:
-        for sheet in doc.sheets():
-            table = sheet.getTable()
-            if table.isPresent():
-                table = table.get()
-                for header in table.headers():
-                    print(header.getTag().getValue(), end=" ")
+    with pyarchery.load(file_path) as doc:
+        for sheet in doc.sheets:
+            table = sheet.table
+            if table:
+                for header in table.headers:
+                    print(header.tag_value, end=" ")
                 print()
-                for row in table.rows():
-                    for cell in row.cells():
-                        print(cell.getValue(), end=" ")
+                for row in table.rows:
+                    for cell in row.cells:
+                        print(cell.value, end=" ")
                     print()

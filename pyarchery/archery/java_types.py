@@ -1,10 +1,11 @@
+# ruff: noqa: N802
+
 import jpype
 import jpype.imports
-
-from java.nio.file import Paths as Paths_  # type: ignore
-from java.util import List as List_  # type: ignore
-from java.util import EnumSet as EnumSet_  # type: ignore
-from com.github.romualdrousseau.shuju.json import JSON as JSON_  # type: ignore
+from com.github.romualdrousseau.archery.commons.dsf.json import JSON as JSON_
+from java.nio.file import Paths as Paths_
+from java.util import EnumSet as EnumSet_
+from java.util import List as List_
 
 
 @jpype._jcustomizer.JConversion("java.nio.file.Path", instanceof=str)
@@ -17,10 +18,8 @@ def _JListConvert(jcls, obj):
     return List_.of(obj)
 
 
-@jpype._jcustomizer.JConversion(
-    "com.github.romualdrousseau.shuju.json.JSONObject", instanceof=str
-)
-def _JJSONObjectConvert(jcls, obj):
+@jpype._jcustomizer.JConversion("com.github.romualdrousseau.archery.commons.dsf.DSFObject", instanceof=str)
+def _JDSFObjectConvert(jcls, obj):
     return JSON_.objectOf(obj)
 
 

@@ -1,47 +1,40 @@
-import pyany2json
+import pyarchery
 
-REPO_BASE_URL = "https://raw.githubusercontent.com/RomualdRousseau/Any2Json-Models/main"
+REPO_BASE_URL = "https://raw.githubusercontent.com/RomualdRousseau/Archery/main/archery-models"
 MODEL_NAME = "sales-english"
 FILE_PATH = "data/document with multiple tables.xlsx"
 FILE_ENCODING = "UTF-8"
 
 
-builder = pyany2json.model_from_uri(f"{REPO_BASE_URL}/{MODEL_NAME}/{MODEL_NAME}.json")
+def get_model():
+    builder = pyarchery.model_from_url(f"{REPO_BASE_URL}/{MODEL_NAME}/{MODEL_NAME}.json")
 
-entities = [v for v in builder.getEntityList() if v != "PACKAGE"]
-entities.append("PRODUCTNAME")
+    entities = [v for v in builder.getEntityList() if v != "PACKAGE"]
+    entities.append("PRODUCTNAME")
 
-patterns = {k: v for (k, v) in builder.getPatternMap().items() if v != "PACKAGE"}
-patterns["\\D+\\dml"] = "PRODUCTNAME"
+    patterns = {k: v for (k, v) in builder.getPatternMap().items() if v != "PACKAGE"}
+    patterns["\\D+\\dml"] = "PRODUCTNAME"
 
-parser = pyany2json.LayexTableParser(
-    ["(v.$)+"], ["(()(S+$))(()([/^TOTAL/|v].+$)())+(/TOTAL/.+$)"]
-)
+    parser = pyarchery.LayexTableParser(["(v.$)+"], ["(()(S+$))(()([/^TOTAL/|v].+$)())+(/TOTAL/.+$)"])
 
-model = (
-    builder.setEntityList(entities)
-    .setPatternMap(patterns)
-    .setTableParser(parser)
-    .build()
-)
+    return builder.setEntityList(entities).setPatternMap(patterns).setTableParser(parser).build()
 
 
-with pyany2json.load(
+def sheet_listener(e):
+    print(e)
+
+
+with pyarchery.load(
     FILE_PATH,
     encoding=FILE_ENCODING,
-    model=model,
-    hints=[pyany2json.INTELLI_LAYOUT],
+    model=get_model(),
+    hints=[pyarchery.INTELLI_LAYOUT, pyarchery.INTELLI_TIME],
     recipe=["sheet.setCapillarityThreshold(0)"],
     tag_case="SNAKE",
 ) as doc:
-    for sheet in doc.sheets():
-        table = sheet.getTable()
-        if table.isPresent():
-            table = table.get()
-            for header in table.headers():
-                print(header.getTag().getValue(), end=" ")
-            print()
-            for row in table.rows():
-                for cell in row.cells():
-                    print(cell.getValue(), end=" ")
-                print()
+    for sheet in doc.sheets:
+        sheet.add_sheet_listener(sheet_listener)
+        table = sheet.table
+        if table:
+            df = table.to_pandas().to_markdown()
+            print(df)

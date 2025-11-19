@@ -1,13 +1,11 @@
 import os
-import jpype
+
 import requests
 
-LIB_PATH = "libs"
-JAR_PATH = "jars"
+from pyarchery.config import JAR_PATH
+
 MAVEN_URL = "https://oss.sonatype.org/content/repositories/releases"
 MAVEN_SNAPSHOT_URL = "https://oss.sonatype.org/content/repositories/snapshots"
-
-jpype.startJVM(classpath=[f"{JAR_PATH}/*", f"{LIB_PATH}/*"])
 
 
 def install_one_dependency(dep):

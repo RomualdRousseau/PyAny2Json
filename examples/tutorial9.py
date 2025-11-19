@@ -1,43 +1,41 @@
-import pyany2json
+import pyarchery
 
-
-REPO_BASE_URL = "https://raw.githubusercontent.com/RomualdRousseau/Any2Json-Models/main"
+REPO_BASE_URL = "https://raw.githubusercontent.com/RomualdRousseau/Archery/main/archery-models"
 MODEL_NAME = "sales-english"
 FILE_PATH = "data/AG120-N-074.pdf"
 FILE_ENCODING = "UTF-8"
 
 
-builder = pyany2json.model_from_uri(f"{REPO_BASE_URL}/{MODEL_NAME}/{MODEL_NAME}.json")
+def get_model():
+    builder = pyarchery.model_from_url(f"{REPO_BASE_URL}/{MODEL_NAME}/{MODEL_NAME}.json")
 
-parser = pyany2json.LayexTableParser(
-    [""], ["((vv$)(v+$v+$))(()(.+$)())+()", "(()(.+$))(()(.+$)())+()"]
-)
+    parser = pyarchery.LayexTableParser([""], ["((vv$)(v+$v+$))(()(.+$)())+()", "(()(.+$))(()(.+$)())+()"])
 
-model = builder.setTableParser(parser).build()
+    return builder.setTableParser(parser).build()
 
 
-def visitTable(parent: pyany2json.TableGraph):
+def visit_table(parent: pyarchery.TableGraph):
     for c in parent.children():
-        table = c.getTable()
-        if isinstance(table, pyany2json.DataTable):
-            for header in table.headers():
-                print(header.getName(), end=" ")
+        table = c.table
+        if isinstance(table, pyarchery.DataTable):
+            for header in table.headers:
+                print(header.tag_value, end=" ")
             print()
-            for row in table.rows():
-                for cell in row.cells():
-                    print(cell.getValue(), end=" ")
+            for row in table.rows:
+                for cell in row.cells:
+                    print(cell.value, end=" ")
                 print()
         if len(c.children()) > 0:
-            visitTable(c)
+            visit_table(c)
 
 
-with pyany2json.load(
+with pyarchery.load(
     FILE_PATH,
     encoding=FILE_ENCODING,
-    model=model,
-    hints=[pyany2json.INTELLI_LAYOUT],
+    model=get_model(),
+    hints=[pyarchery.INTELLI_LAYOUT],
 ) as doc:
-    for sheet in doc.sheets():
-        root = sheet.getTableGraph()
-        if root.isPresent():
-            visitTable(root.get())
+    for sheet in doc.sheets:
+        root = sheet.table_graph
+        if root:
+            visit_table(root)
