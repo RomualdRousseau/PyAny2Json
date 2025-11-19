@@ -1,8 +1,8 @@
 # Tutorial 1 - Getting Started
 
-[View source on GitHub](https://github.com/RomualdRousseau/PyAny2Json).
+[View source on GitHub](https://github.com/RomualdRousseau/PyArchery).
 
-This short introduction uses [Any2Json](https://github.com/RomualdRousseau/PyAny2Json) to:
+This short introduction uses [PyArchery](https://github.com/RomualdRousseau/PyArchery) to:
 
 1. Load simple tabular documents in CSV and Exce formats.
 2. Display the tabular result on the console.
@@ -11,19 +11,19 @@ The expected layout of each document is a single header row followed by rows of 
 
 ![document with simple table](images/tutorial1_data.png)
 
-## Setup PyAny2Json
+## Setup PyArchery
 
 Before to use the package, you need to download the jars in your project. Run the following command line at the root of
 your python project:
 
 ```bash
-python pyany2json/setup.py
+python pyarchery/setup.py
 ```
 
 ### Import the package:
 
 ```python
-import pyany2json
+import pyarchery
 ```
 
 ## Minimal code
@@ -32,12 +32,11 @@ The minimal code to load a document is as follow:
 
 ```python
 with pyany2json.load(file_path, encoding="UTF-8") as doc:
-    for sheet in doc.sheets():
-        table = sheet.getTable()
-        if table.isPresent():
-            table = table.get()
-            doSomethingWithHeaders(table.headers())
-            doSomethingWithRows(table.rows())
+    for sheet in doc.sheets:
+        table = sheet.table
+        if table:
+            doSomethingWithHeaders(table.headers)
+            doSomethingWithRows(table.rows)
 ```
 
 The encoding ("UTF-8" here) is used if the encoding could not be detected when loading the document.
@@ -45,15 +44,15 @@ The encoding ("UTF-8" here) is used if the encoding could not be detected when l
 ### Iterate overs the headers:
 
 ```python
-for header in table.headers():
+for header in table.headers:
     # Do something with the header
 ```
 
 ### Iterate over the rows and cells:
 
 ```python
-for row in table.rows():
-    for cell in row.cells():
+for row in table.rows:
+    for cell in row.cells:
         # Do something with the cell
 ```
 
@@ -71,17 +70,16 @@ FILE_PATHS = [
 ]
 
 for file_path in FILE_PATHS:
-    with pyany2json.load(file_path) as doc:
-        for sheet in doc.sheets():
-            table = sheet.getTable()
-            if table.isPresent():
-                table = table.get()
-                for header in table.headers():
-                    print(header.getTag().getValue(), end=" ")
+    with pyarchery.load(file_path) as doc:
+        for sheet in doc.sheets:
+            table = sheet.table
+            if table:
+                for header in table.headers:
+                    print(header.tag_value, end=" ")
                 print()
-                for row in table.rows():
-                    for cell in row.cells():
-                        print(cell.getValue(), end=" ")
+                for row in table.rows:
+                    for cell in row.cells:
+                        print(cell.value, end=" ")
                     print()
 ```
 

@@ -49,7 +49,7 @@ security:
 
 # Clean build artifacts and cache
 clean:
-    uvx pyclean .
+    uvx pyclean . --debris
 
 # Build the package
 build:

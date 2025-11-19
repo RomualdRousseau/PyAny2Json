@@ -2,7 +2,7 @@ import os
 
 import requests
 
-from pyarchery.config import JAR_PATH
+JAR_PATH = "jars"
 
 MAVEN_URL = "https://oss.sonatype.org/content/repositories/releases"
 MAVEN_SNAPSHOT_URL = "https://oss.sonatype.org/content/repositories/snapshots"

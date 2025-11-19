@@ -1,4 +1,4 @@
-# Welcome to PyAny2Json Documents
+# Welcome to PyArchery Documents
 
 ***Revolutionizing Data Management: The Transformative Potential of a Novel Framework for Semi-Structured Documents***
 
@@ -17,4 +17,4 @@
 
 ## How it works
 
-* Please find detailed explanations on how Any2json works and its unique features [here](https://romualdrousseau.github.io/Any2Json-Documents/)
+* Please find detailed explanations on how PyArchery works and its unique features [here](https://romualdrousseau.github.io/PyArchery-Documents/)

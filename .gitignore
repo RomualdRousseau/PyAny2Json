@@ -15,6 +15,6 @@ wheels/
 # Ruff
 .ruff_cache
 
-# Saves
+# Other
 saved/
 jars
