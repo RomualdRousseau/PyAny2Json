@@ -3,13 +3,9 @@
 import jpype
 import jpype.imports
 
-from pyarchery.config import JAR_PATH, LIB_PATH
+from pyarchery.setup import start_java_archery_framework
 
-jpype.startJVM(
-    "-ea",
-    "--add-opens=java.base/java.nio=ALL-UNNAMED",
-    classpath=[f"{JAR_PATH}/*", f"{LIB_PATH}/*"],
-)
+start_java_archery_framework()
 
 from pyarchery.archery import (
     CAMEL,

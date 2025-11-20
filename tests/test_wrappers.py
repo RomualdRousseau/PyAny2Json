@@ -50,7 +50,3 @@ def test_load_and_wrappers():
             assert len(lines) == len(rows) + 1  # header + rows
 
         os.remove(output_csv)
-
-
-if __name__ == "__main__":
-    test_load_and_wrappers()
