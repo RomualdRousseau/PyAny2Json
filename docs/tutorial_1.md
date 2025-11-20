@@ -13,13 +13,6 @@ The expected layout of each document is a single header row followed by rows of 
 
 ## Setup PyArchery
 
-Before to use the package, you need to download the jars in your project. Run the following command line at the root of
-your python project:
-
-```bash
-python pyarchery/setup.py
-```
-
 ### Import the package:
 
 ```python
