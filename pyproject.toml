@@ -19,18 +19,14 @@ dependencies = [
 [dependency-groups]
 dev = [
     "mkdocs>=1.6.1",
+    "mkdocs-material>=9.5.0",
+    "mkdocstrings[python]>=0.24.0",
     "pytest>=9.0.1",
 ]
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
-
-# [tool.hatch.build.targets.sdist]
-# include = ["src/pyarchery", "libs", "dependencies"]
-
-# [tool.hatch.build.targets.wheel]
-# include = ["src/pyarchery", "libs", "dependencies"]
 
 [tool.ruff]
 line-length = 120

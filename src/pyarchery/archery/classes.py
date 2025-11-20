@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Any, Optional
 
 from com.github.romualdrousseau.archery import (
     Document as Document_,
@@ -132,7 +132,7 @@ class Table:
         """
         ...
 
-    def getRowAt(self, rowIndex) -> Row:
+    def getRowAt(self, rowIndex: int) -> Row:
         """Get the row at the specified index.
 
         Args:
@@ -162,7 +162,7 @@ class Table:
         """
         ...
 
-    def getHeaderAt(self, i) -> Header:
+    def getHeaderAt(self, i: int) -> Header:
         """Get the header at the specified index.
 
         Args:
@@ -358,7 +358,9 @@ class Document:
         """
         ...
 
-    def __exit__(self, exception_type, exception_value, traceback):
+    def __exit__(
+        self, exception_type: Optional[type], exception_value: Optional[BaseException], traceback: Optional[Any]
+    ):
         """Exit the context manager.
 
         Args:

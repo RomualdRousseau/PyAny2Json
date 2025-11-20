@@ -89,3 +89,11 @@ lock:
 # Start editing
 edit:
     uv run nvim
+
+# Build documentation
+doc-build:
+    uv run mkdocs build
+
+# Deploy documentation
+doc-deploy:
+    uv run mkdocs gh-deploy
