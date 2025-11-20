@@ -9,4 +9,4 @@
 
 ## How it works
 
-* Please find detailed explanations on how PyArchery works and its unique features [here](https://romualdrousseau.github.io/PyArchery-Documents/)
+* Please find detailed explanations on how PyArchery works and its unique features [here](https://romualdrousseau.github.io/Archery/)
