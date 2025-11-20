@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,11 +8,15 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Tutorial 1 - Getting Started - PyAny2Json Documents</title>
+        <title>Tutorial 1 - Getting Started - PyArchery Documents</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script>hljs.highlightAll();</script> 
     </head>
@@ -20,14 +24,14 @@
     <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="..">PyAny2Json Documents</a>
+                <a class="navbar-brand" href="..">PyArchery Documents</a>
 
                 <!-- Expanded navigation -->
                 <div id="navbar-collapse" class="navbar-collapse collapse">
 
-                    <ul class="nav navbar-nav ml-auto">
+                    <ul class="nav navbar-nav ms-md-auto">
                         <li class="nav-item">
-                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
@@ -38,32 +42,32 @@
 
         <div class="container">
             <div class="row">
-                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
     <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
             <span class="fa fa-angle-down"></span>
         </button>
     </div>
 
     
-    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#tutorial-1-getting-started" class="nav-link">Tutorial 1 - Getting Started</a>
+            <li class="nav-item" data-bs-level="1"><a href="#tutorial-1-getting-started" class="nav-link">Tutorial 1 - Getting Started</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#setup-pyany2json" class="nav-link">Setup PyAny2Json</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#minimal-code" class="nav-link">Minimal code</a>
+            <li class="nav-item" data-bs-level="2"><a href="#setup-pyarchery" class="nav-link">Setup PyArchery</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#load-several-file-formats" class="nav-link">Load several file formats</a>
+            <li class="nav-item" data-bs-level="2"><a href="#minimal-code" class="nav-link">Minimal code</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+            <li class="nav-item" data-bs-level="2"><a href="#load-several-file-formats" class="nav-link">Load several file formats</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -75,45 +79,44 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="tutorial-1-getting-started">Tutorial 1 - Getting Started</h1>
-<p><a href="https://github.com/RomualdRousseau/PyAny2Json">View source on GitHub</a>.</p>
-<p>This short introduction uses <a href="https://github.com/RomualdRousseau/PyAny2Json">Any2Json</a> to:</p>
+<p><a href="https://github.com/RomualdRousseau/PyArchery">View source on GitHub</a>.</p>
+<p>This short introduction uses <a href="https://github.com/RomualdRousseau/PyArchery">PyArchery</a> to:</p>
 <ol>
 <li>Load simple tabular documents in CSV and Exce formats.</li>
 <li>Display the tabular result on the console.</li>
 </ol>
 <p>The expected layout of each document is a single header row followed by rows of cells:</p>
 <p><img alt="document with simple table" src="../images/tutorial1_data.png" /></p>
-<h2 id="setup-pyany2json">Setup PyAny2Json</h2>
+<h2 id="setup-pyarchery">Setup PyArchery</h2>
 <p>Before to use the package, you need to download the jars in your project. Run the following command line at the root of
 your python project:</p>
-<pre><code class="language-bash">python pyany2json/setup.py
+<pre><code class="language-bash">python pyarchery/setup.py
 </code></pre>
 <h3 id="import-the-package">Import the package:</h3>
-<pre><code class="language-python">import pyany2json
+<pre><code class="language-python">import pyarchery
 </code></pre>
 <h2 id="minimal-code">Minimal code</h2>
 <p>The minimal code to load a document is as follow:</p>
-<pre><code class="language-python">with pyany2json.load(file_path, encoding=&quot;UTF-8&quot;) as doc:
-    for sheet in doc.sheets():
-        table = sheet.getTable()
-        if table.isPresent():
-            table = table.get()
-            doSomethingWithHeaders(table.headers())
-            doSomethingWithRows(table.rows())
+<pre><code class="language-python">with pyarchery.load(file_path, encoding=&quot;UTF-8&quot;) as doc:
+    for sheet in doc.sheets:
+        table = sheet.table
+        if table:
+            doSomethingWithHeaders(table.headers)
+            doSomethingWithRows(table.rows)
 </code></pre>
 <p>The encoding ("UTF-8" here) is used if the encoding could not be detected when loading the document.</p>
 <h3 id="iterate-overs-the-headers">Iterate overs the headers:</h3>
-<pre><code class="language-python">for header in table.headers():
+<pre><code class="language-python">for header in table.headers:
     # Do something with the header
 </code></pre>
 <h3 id="iterate-over-the-rows-and-cells">Iterate over the rows and cells:</h3>
-<pre><code class="language-python">for row in table.rows():
-    for cell in row.cells():
+<pre><code class="language-python">for row in table.rows:
+    for cell in row.cells:
         # Do something with the cell
 </code></pre>
 <h2 id="load-several-file-formats">Load several file formats</h2>
 <p>Here is a complete example to load and print the content of different CSV and Excel files:</p>
-<pre><code class="language-python">import pyany2json
+<pre><code class="language-python">import pyarchery
 
 FILE_PATHS = [
     &quot;data/document with simple table.csv&quot;,
@@ -122,17 +125,16 @@ FILE_PATHS = [
 ]
 
 for file_path in FILE_PATHS:
-    with pyany2json.load(file_path) as doc:
-        for sheet in doc.sheets():
-            table = sheet.getTable()
-            if table.isPresent():
-                table = table.get()
-                for header in table.headers():
-                    print(header.getTag().getValue(), end=&quot; &quot;)
+    with pyarchery.load(file_path) as doc:
+        for sheet in doc.sheets:
+            table = sheet.table
+            if table:
+                for header in table.headers:
+                    print(header.tag_value, end=&quot; &quot;)
                 print()
-                for row in table.rows():
-                    for cell in row.cells():
-                        print(cell.getValue(), end=&quot; &quot;)
+                for row in table.rows:
+                    for cell in row.cells:
+                        print(cell.value, end=&quot; &quot;)
                     print()
 </code></pre>
 <pre><code class="language-bash">date client qty amount 
@@ -152,8 +154,8 @@ date client qty amount
 2023-02-01 AAA 1 100
 </code></pre>
 <h2 id="conclusion">Conclusion</h2>
-<p>Congratulations! You have loaded documents using Any2Json.</p>
-<p>For more examples of using Any2Json, check out the <a href="../">tutorials</a>.</p></div>
+<p>Congratulations! You have loaded documents using PyArchery.</p>
+<p>For more examples of using PyArchery, check out the <a href="../">tutorials</a>.</p></div>
             </div>
         </div>
 
@@ -161,8 +163,7 @@ date client qty amount
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script src="../js/jquery-3.6.0.min.js"></script>
-        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/bootstrap.bundle.min.js"></script>
         <script>
             var base_url = "..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
@@ -175,7 +176,7 @@ date client qty amount
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p>From here you can search these documents. Enter your search terms below.</p>
@@ -195,7 +196,7 @@ date client qty amount
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <table class="table">

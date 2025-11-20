@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,11 +8,15 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Tutorial 2 - Data extraction with a complex semi-structured layout - PyAny2Json Documents</title>
+        <title>Tutorial 2 - Data extraction with a complex semi-structured layout - PyArchery Documents</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script>hljs.highlightAll();</script> 
     </head>
@@ -20,14 +24,14 @@
     <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="..">PyAny2Json Documents</a>
+                <a class="navbar-brand" href="..">PyArchery Documents</a>
 
                 <!-- Expanded navigation -->
                 <div id="navbar-collapse" class="navbar-collapse collapse">
 
-                    <ul class="nav navbar-nav ml-auto">
+                    <ul class="nav navbar-nav ms-md-auto">
                         <li class="nav-item">
-                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
@@ -38,32 +42,32 @@
 
         <div class="container">
             <div class="row">
-                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
     <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
             <span class="fa fa-angle-down"></span>
         </button>
     </div>
 
     
-    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#tutorial-2-data-extraction-with-a-complex-semi-structured-layout" class="nav-link">Tutorial 2 - Data extraction with a complex semi-structured layout</a>
+            <li class="nav-item" data-bs-level="1"><a href="#tutorial-2-data-extraction-with-a-complex-semi-structured-layout" class="nav-link">Tutorial 2 - Data extraction with a complex semi-structured layout</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#setup-pyany2json" class="nav-link">Setup PyAny2Json</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#minimal-code" class="nav-link">Minimal code</a>
+            <li class="nav-item" data-bs-level="2"><a href="#setup-pyarchery" class="nav-link">Setup PyArchery</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#load-base-model" class="nav-link">Load base model</a>
+            <li class="nav-item" data-bs-level="2"><a href="#minimal-code" class="nav-link">Minimal code</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+            <li class="nav-item" data-bs-level="2"><a href="#load-base-model" class="nav-link">Load base model</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -75,22 +79,22 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="tutorial-2-data-extraction-with-a-complex-semi-structured-layout">Tutorial 2 - Data extraction with a complex semi-structured layout</h1>
-<p><a href="https://github.com/RomualdRousseau/PyAny2Json">View source on GitHub</a>.</p>
-<p>This tutorial will demonstrate how to use <a href="https://github.com/RomualdRousseau/PyAny2Json">Any2Json</a> to extract data from
+<p><a href="https://github.com/RomualdRousseau/PyArchery">View source on GitHub</a>.</p>
+<p>This tutorial will demonstrate how to use <a href="https://github.com/RomualdRousseau/PyArchery">PyArchery</a> to extract data from
 one Excel spreadsheet. To demonstrate the usage of this framework, we will load a document with a somewhat complex
 layout, as seen here:</p>
 <p><img alt="document with multiple tables" src="../images/tutorial2_data.png" /></p>
-<h2 id="setup-pyany2json">Setup PyAny2Json</h2>
+<h2 id="setup-pyarchery">Setup PyArchery</h2>
 <p>Before to use the package, you need to download the jars in your project. Run the following command line at the root of
 your python project:</p>
-<pre><code class="language-bash">python pyany2json/setup.py
+<pre><code class="language-bash">python pyarchery/setup.py
 </code></pre>
 <h3 id="import-the-package">Import the package:</h3>
-<pre><code class="language-python">import pyany2json
+<pre><code class="language-python">import pyarchery
 </code></pre>
 <h2 id="minimal-code">Minimal code</h2>
 <p>The minimal code to load a document is as follow:</p>
-<pre><code class="language-python">with pyany2json.load(file_path, encoding=&quot;UTF-8&quot;) as doc:
+<pre><code class="language-python">with pyarchery.load(file_path, encoding=&quot;UTF-8&quot;) as doc:
     for sheet in doc.sheets():
         table = sheet.getTable()
         if table.isPresent():
@@ -100,9 +104,8 @@ your python project:</p>
 </code></pre>
 <p>The encoding ("UTF-8" here) is used if the encoding could not be detected when loading the document.</p>
 <h2 id="load-base-model">Load base model</h2>
-<p>To parse a document, any2Json needs a model that will contains the parameters required to the parsing. Instead to start
-from an empty Model (See <a href="../tutorial_10/">Tutorial 10</a>), we will start from an existing one and we will adapt it for our
-document. You can find a list and details of all models <a href="https://github.com/RomualdRousseau/Any2Json-Models/">here</a>.</p>
+<p>To parse a document, PyArchery needs a model that will contains the parameters required to the parsing. Instead to start
+/from an empty Model (See <a href="tutorial_10.md">Tutorial 10</a>), we will start from an existing one and we will adapt it for our document. You can find a list and details of all models <a href="https://github.com/RomualdRousseau/Archeryarchery-models">here</a>.</p>
 <p>The base model, we will use, is "sales-english" that has been trained on 200+ english documents containing distributor
 data and with a large range of different layouts.</p>
 <p>The base model already recognize some entities such as DATE and NUMBER. We will setup the model to add one new entity
@@ -114,7 +117,7 @@ FILE_PATH = &quot;data/document with multiple tables.xlsx&quot;
 FILE_ENCODING = &quot;UTF-8&quot;
 
 
-builder = pyany2json.model_from_uri(f&quot;{REPO_BASE_URL}/{MODEL_NAME}/{MODEL_NAME}.json&quot;)
+builder = pyarchery.model_from_uri(f&quot;{REPO_BASE_URL}/{MODEL_NAME}/{MODEL_NAME}.json&quot;)
 
 entities = [v for v in builder.getEntityList() if v != &quot;PACKAGE&quot;]
 entities.append(&quot;PRODUCTNAME&quot;)
@@ -122,7 +125,7 @@ entities.append(&quot;PRODUCTNAME&quot;)
 patterns = {k: v for (k, v) in builder.getPatternMap().items() if v != &quot;PACKAGE&quot;}
 patterns[&quot;\\D+\\dml&quot;] = &quot;PRODUCTNAME&quot;
 
-parser = pyany2json.LayexTableParser(
+parser = pyarchery.LayexTableParser(
     [&quot;(v.$)+&quot;], [&quot;(()(S+$))(()([/^TOTAL/|v].+$)())+(/TOTAL/.+$)&quot;]
 )
 
@@ -135,13 +138,13 @@ model = (
 </code></pre>
 <h3 id="load-the-document">Load the document</h3>
 <p>We load the document by creating a document instance with the model and options to parse the document. The hint
-"pyany2json.INTELLI_LAYOUT" will tell the document instance that the document has a complex layout. The recipe
+"pyarchery.INTELLI_LAYOUT" will tell the document instance that the document has a complex layout. The recipe
 "sheet.setCapillarityThreshold(0)" will tell the parser engine to extract the features as <strong><em>small</em></strong> as possible. And finally we want the tag case to be in snake case notation:</p>
-<pre><code class="language-python">with pyany2json.load(
+<pre><code class="language-python">with pyarchery.load(
     FILE_PATH,
     encoding=FILE_ENCODING,
     model=model,
-    hints=[pyany2json.INTELLI_LAYOUT],
+    hints=[pyarchery.INTELLI_LAYOUT],
     recipe=[&quot;sheet.setCapillarityThreshold(0)&quot;],
     tag_case=&quot;SNAKE&quot;
 ) as doc:
@@ -178,8 +181,8 @@ A document very important 2023-02-01 Product 3ml 2023-02-01 DDD 1 100
 <p>On this output, we print out the graph of the document built during the parsing and we can see clearly the relation
 between the elements of the spreadsheet and how there are structured in tabular form.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>Congratulations! You have loaded documents using Any2Json.</p>
-<p>For more examples of using Any2Json, check out the <a href="../">tutorials</a>.</p></div>
+<p>Congratulations! You have loaded documents using PyArchery.</p>
+<p>For more examples of using PyArchery, check out the <a href="../">tutorials</a>.</p></div>
             </div>
         </div>
 
@@ -187,8 +190,7 @@ between the elements of the spreadsheet and how there are structured in tabular 
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script src="../js/jquery-3.6.0.min.js"></script>
-        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/bootstrap.bundle.min.js"></script>
         <script>
             var base_url = "..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
@@ -201,7 +203,7 @@ between the elements of the spreadsheet and how there are structured in tabular 
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p>From here you can search these documents. Enter your search terms below.</p>
@@ -221,7 +223,7 @@ between the elements of the spreadsheet and how there are structured in tabular 
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <table class="table">
