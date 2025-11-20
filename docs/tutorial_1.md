@@ -31,7 +31,7 @@ import pyarchery
 The minimal code to load a document is as follow:
 
 ```python
-with pyany2json.load(file_path, encoding="UTF-8") as doc:
+with pyarchery.load(file_path, encoding="UTF-8") as doc:
     for sheet in doc.sheets:
         table = sheet.table
         if table:
@@ -61,7 +61,7 @@ for row in table.rows:
 Here is a complete example to load and print the content of different CSV and Excel files:
 
 ```python
-import pyany2json
+import pyarchery
 
 FILE_PATHS = [
     "data/document with simple table.csv",
@@ -103,6 +103,6 @@ date client qty amount
 
 ## Conclusion
 
-Congratulations! You have loaded documents using Any2Json.
+Congratulations! You have loaded documents using PyArchery.
 
-For more examples of using Any2Json, check out the [tutorials](index.md).
+For more examples of using PyArchery, check out the [tutorials](index.md).

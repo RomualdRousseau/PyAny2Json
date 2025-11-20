@@ -1,26 +1,26 @@
 # Tutorial 2 - Data extraction with a complex semi-structured layout
 
-[View source on GitHub](https://github.com/RomualdRousseau/PyAny2Json).
+[View source on GitHub](https://github.com/RomualdRousseau/PyArchery).
 
-This tutorial will demonstrate how to use [Any2Json](https://github.com/RomualdRousseau/PyAny2Json) to extract data from
+This tutorial will demonstrate how to use [PyArchery](https://github.com/RomualdRousseau/PyArchery) to extract data from
 one Excel spreadsheet. To demonstrate the usage of this framework, we will load a document with a somewhat complex
 layout, as seen here:
 
 ![document with multiple tables](images/tutorial2_data.png)
 
-## Setup PyAny2Json
+## Setup PyArchery
 
 Before to use the package, you need to download the jars in your project. Run the following command line at the root of
 your python project:
 
 ```bash
-python pyany2json/setup.py
+python pyarchery/setup.py
 ```
 
 ### Import the package:
 
 ```python
-import pyany2json
+import pyarchery
 ```
 
 ## Minimal code
@@ -28,7 +28,7 @@ import pyany2json
 The minimal code to load a document is as follow:
 
 ```python
-with pyany2json.load(file_path, encoding="UTF-8") as doc:
+with pyarchery.load(file_path, encoding="UTF-8") as doc:
     for sheet in doc.sheets():
         table = sheet.getTable()
         if table.isPresent():
@@ -41,9 +41,8 @@ The encoding ("UTF-8" here) is used if the encoding could not be detected when l
 
 ## Load base model
 
-To parse a document, any2Json needs a model that will contains the parameters required to the parsing. Instead to start
-from an empty Model (See [Tutorial 10](tutorial_10.md)), we will start from an existing one and we will adapt it for our
-document. You can find a list and details of all models [here](https://github.com/RomualdRousseau/Any2Json-Models/).
+To parse a document, PyArchery needs a model that will contains the parameters required to the parsing. Instead to start
+/from an empty Model (See [Tutorial 10](tutorial_10.md)), we will start from an existing one and we will adapt it for our document. You can find a list and details of all models [here](https://github.com/RomualdRousseau/Archeryarchery-models).
 
 The base model, we will use, is "sales-english" that has been trained on 200+ english documents containing distributor
 data and with a large range of different layouts.
@@ -60,7 +59,7 @@ FILE_PATH = "data/document with multiple tables.xlsx"
 FILE_ENCODING = "UTF-8"
 
 
-builder = pyany2json.model_from_uri(f"{REPO_BASE_URL}/{MODEL_NAME}/{MODEL_NAME}.json")
+builder = pyarchery.model_from_uri(f"{REPO_BASE_URL}/{MODEL_NAME}/{MODEL_NAME}.json")
 
 entities = [v for v in builder.getEntityList() if v != "PACKAGE"]
 entities.append("PRODUCTNAME")
@@ -68,7 +67,7 @@ entities.append("PRODUCTNAME")
 patterns = {k: v for (k, v) in builder.getPatternMap().items() if v != "PACKAGE"}
 patterns["\\D+\\dml"] = "PRODUCTNAME"
 
-parser = pyany2json.LayexTableParser(
+parser = pyarchery.LayexTableParser(
     ["(v.$)+"], ["(()(S+$))(()([/^TOTAL/|v].+$)())+(/TOTAL/.+$)"]
 )
 
@@ -83,15 +82,15 @@ model = (
 ### Load the document
 
 We load the document by creating a document instance with the model and options to parse the document. The hint
-"pyany2json.INTELLI_LAYOUT" will tell the document instance that the document has a complex layout. The recipe
+"pyarchery.INTELLI_LAYOUT" will tell the document instance that the document has a complex layout. The recipe
 "sheet.setCapillarityThreshold(0)" will tell the parser engine to extract the features as ***small*** as possible. And finally we want the tag case to be in snake case notation:
 
 ```python
-with pyany2json.load(
+with pyarchery.load(
     FILE_PATH,
     encoding=FILE_ENCODING,
     model=model,
-    hints=[pyany2json.INTELLI_LAYOUT],
+    hints=[pyarchery.INTELLI_LAYOUT],
     recipe=["sheet.setCapillarityThreshold(0)"],
     tag_case="SNAKE"
 ) as doc:
@@ -137,6 +136,6 @@ between the elements of the spreadsheet and how there are structured in tabular 
 
 ## Conclusion
 
-Congratulations! You have loaded documents using Any2Json.
+Congratulations! You have loaded documents using PyArchery.
 
-For more examples of using Any2Json, check out the [tutorials](index.md).
+For more examples of using PyArchery, check out the [tutorials](index.md).
