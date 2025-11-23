@@ -7,10 +7,11 @@ import jpype.imports
 import requests
 from tqdm import tqdm
 
-from pyarchery.config import MAVEN_SNAPSHOT_URL, MAVEN_URL
+from .config import MAVEN_SNAPSHOT_URL, MAVEN_URL
+from .version import __version__
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("pyarchery")
+# logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__package__)
 
 
 def install_one_dependency(jars_path, dep, pbar=None):
@@ -59,14 +60,16 @@ def start_java_archery_framework():
     if jpype.isJVMStarted():
         return
 
-    package_path = resources.files("pyarchery")
-    jars_path = package_path.parent.parent / "jars"
-    libs_path = package_path.parent.parent / "libs"
+    package_path = resources.files(__package__)
+    jars_path = package_path.parent / f"{__package__}.jars"
+    libs_path = package_path.parent / f"{__package__}.libs"
     deps_path = package_path / "dependencies"
 
     options = [
         "-ea",
         "--add-opens=java.base/java.nio=ALL-UNNAMED",
+        "--enable-native-access=ALL-UNNAMED",
+        # "--sun-misc-unsafe-memory-access=allow",
     ]
 
     classpath = [f"{jars_path}/*", f"{libs_path}/*"]
@@ -81,4 +84,5 @@ def start_java_archery_framework():
     jpype.startJVM(*options, classpath=classpath)
 
 
-logger.warning("JAVA ARCHERY FRAMEWORK LOADED")
+start_java_archery_framework()
+logger.warning(f"JAVA ARCHERY FRAMEWORK {__version__} LOADED")

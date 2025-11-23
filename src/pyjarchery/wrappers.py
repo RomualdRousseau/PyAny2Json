@@ -1,29 +1,28 @@
 import tempfile
 from typing import Any, Iterator, List, Optional
 
-import pandas as pd
 import pyarrow
 import pyarrow as pa
 
-from pyarchery.archery import (
+from .archery import (
     Cell as JCell,
 )
-from pyarchery.archery import (
+from .archery import (
     Document as JDocument,
 )
-from pyarchery.archery import (
+from .archery import (
     Header as JHeader,
 )
-from pyarchery.archery import (
+from .archery import (
     Row as JRow,
 )
-from pyarchery.archery import (
+from .archery import (
     Sheet as JSheet,
 )
-from pyarchery.archery import (
+from .archery import (
     Table as JTable,
 )
-from pyarchery.archery import (
+from .archery import (
     TableGraph as JTableGraph,
 )
 
@@ -204,15 +203,6 @@ class TableWrapper:
             self._table.to_arrow(file_path)
             with pyarrow.ipc.open_stream(file_path) as reader:
                 return reader.read_all()
-
-    def to_pandas(self) -> pd.DataFrame:
-        """Convert the table to a Pandas DataFrame.
-
-        Returns:
-            pd.DataFrame: A Pandas DataFrame representation of the table.
-
-        """
-        return self.to_arrow().to_pandas()
 
     def to_csv(self, path: str):
         """Write the table to a CSV file.

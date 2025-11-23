@@ -1,23 +1,23 @@
 [project]
-name = "pyarchery"
-version = "0.1.4"
-description = "Python binding to Archery"
+name = "pyjarchery"
+version = "0.1.11"
+description = "Python binding to Java Archery Framework"
 readme = "README.md"
 authors = [
     { name = "Romuald Rousseau", email = "romuald.rousseau@servier.com" },
 ]
-requires-python = "~=3.11"
+requires-python = "~=3.11.0"
 dependencies = [
     "jpype1>=1.6.0",
-    "pandas>=2.3.3",
     "pyarrow>=22.0.0",
     "requests>=2.32.5",
-    "tabulate>=0.9.0",
     "tqdm>=4.67.1",
 ]
 
 [dependency-groups]
 dev = [
+    "pandas>=2.3.3",
+    "tabulate>=0.9.0",
     "mkdocs>=1.6.1",
     "mkdocs-material>=9.5.0",
     "mkdocstrings[python]>=0.24.0",
@@ -27,6 +27,18 @@ dev = [
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.hatch.build]
+include = [
+    "src/pyjarchery/**",
+    "src/pyjarchery.libs/**",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+  "src/pyjarchery",
+  "src/pyjarchery.libs",
+]
 
 [tool.ruff]
 line-length = 120

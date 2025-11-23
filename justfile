@@ -1,3 +1,5 @@
+set dotenv-load
+
 APP_NAME := "pyarchery"
 
 # Default recipe to display help
@@ -88,7 +90,7 @@ lock:
 
 # Start editing
 edit:
-    uv run nvim
+    uv run nvim .
 
 # Build documentation
 doc-build:
@@ -97,3 +99,7 @@ doc-build:
 # Deploy documentation
 doc-deploy:
     uv run mkdocs gh-deploy
+
+# Deploy to PyPi
+deploy:
+  uvx twine upload dist/*

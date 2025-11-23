@@ -25,4 +25,7 @@ def _JDSFObjectConvert(jcls, obj):
 
 @jpype._jcustomizer.JConversion("java.util.EnumSet", instanceof=list)
 def _JEnumSetConvert(jcls, obj):
-    return EnumSet_.of(*obj)
+    if len(obj) <= 2:
+        return EnumSet_.of(*obj)
+    else:
+        return EnumSet_.of(obj[0], obj[1:])

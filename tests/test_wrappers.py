@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import pyarrow as pa
 
-import pyarchery
+import pyjarchery as pyarchery
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "../data")
 CSV_FILE = os.path.join(DATA_DIR, "document with simple table.csv")

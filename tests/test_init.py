@@ -1,13 +1,12 @@
 import jpype
 import pytest
 
-from pyarchery.setup import start_java_archery_framework
+from pyjarchery.setup_java import start_java_archery_framework
 
 
 def test_jvm_initialization():
     """Test that the JVM starts correctly and is idempotent."""
     # Ensure JVM is started (it might be started by other tests or __init__)
-    start_java_archery_framework()
     assert jpype.isJVMStarted()
 
 

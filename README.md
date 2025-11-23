@@ -26,24 +26,18 @@ tutorials and find a full list of plugins and models.
 
 ### Dependencies
 
-* The Java Developer Kit, version 17.
-* Python 3.8.2 or above.
-* Pip 20.0.2 or above.
-* Poetry 1.7.1 or above.
-* Just 1.24.0 or above.
+- The Java Developer Kit, version 17.
+- Python 3.8.2 or above.
+- Pip 20.0.2 or above.
+- Poetry 1.7.1 or above.
+- Just 1.24.0 or above.
 
 ### Install and setup locally
 
 Run the following command line:
 
 ```bash
-pip install pyarchery
-```
-
-Before to use the package, you need to download the jars in your project. Run the following command line:
-
-```bash
-python pyarchery/setup.py
+pip install pyjarchery
 ```
 
 ### Run the examples
@@ -54,12 +48,18 @@ To run the tutorial1:
 python examples/tutorial1.py
 ```
 
+To run the tutorial2:
+
+```bash
+python examples/tutorial2.py
+```
+
 ### Documentation
 
 The following links will give you documentation about some background information, takes you through some implementation details,
 and then focuses on step-by-step instructions for getting the most out of Any2Json:
 
-* Using PyArchery: [here](https://romualdrousseau.github.io/PyArchery/).
+- Using PyArchery: [here](https://romualdrousseau.github.io/PyArchery/).
 
 ## Contribute
 
@@ -69,10 +69,4 @@ Please make sure to update tests as appropriate.
 
 ## Authors
 
-* Romuald Rousseau, romuald.rousseau@servier.com
-
-## Version History
-
-* 0.1.1
-* 0.1.0
-* Initial Release
+- Romuald Rousseau, romuald.rousseau@servier.com

@@ -4,7 +4,7 @@ import pandas as pd
 import pyarrow as pa
 import pytest
 
-import pyarchery
+import pyjarchery as pyarchery
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "../data")
 

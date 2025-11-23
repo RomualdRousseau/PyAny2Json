@@ -11,10 +11,22 @@ from com.github.romualdrousseau.archery import (
     DocumentFactory as DocumentFactory_,
 )
 from com.github.romualdrousseau.archery import (
+    SheetEvent as SheetEvent_,
+)
+from com.github.romualdrousseau.archery import (
     TagClassifier as TagClassifier_,
 )
 from com.github.romualdrousseau.archery.base import (
     DataTable as DataTable_,
+)
+from com.github.romualdrousseau.archery.event import (
+    AllTablesExtractedEvent as AllTablesExtractedEvent_,
+)
+from com.github.romualdrousseau.archery.event import (
+    DataTableListBuiltEvent as DataTableListBuiltEvent_,
+)
+from com.github.romualdrousseau.archery.event import (
+    MetaTableListBuiltEvent as MetaTableListBuiltEvent_,
 )
 from com.github.romualdrousseau.archery.modeldata import (
     JsonModelBuilder as ModelBuilder_,
@@ -22,6 +34,43 @@ from com.github.romualdrousseau.archery.modeldata import (
 from com.github.romualdrousseau.archery.parser import (
     LayexTableParser as LayexTableParser_,
 )
+
+
+class SheetEvent:
+    def getSource(self) -> Sheet: ...
+
+
+class AllTablesExtractedEvent(SheetEvent):
+    def getTables(self) -> list[Table]:
+        """Get all extracted tables.
+
+        Returns:
+            list[Table]: The list of tables extracted.
+
+        """
+        ...
+
+
+class DataTableListBuiltEvent(SheetEvent):
+    def getDataTables(self) -> list[Table]:
+        """Get all data tables parsed by a data layex.
+
+        Returns:
+            list[Table]: The list of data tables.
+
+        """
+        ...
+
+
+class MetaTableListBuiltEvent(SheetEvent):
+    def getMetaTables(self) -> list[Table]:
+        """Get all meta tables parsed by a meta layex.
+
+        Returns:
+            list[Table]: The list of meta tables.
+
+        """
+        ...
 
 
 class HeaderTag:
@@ -65,6 +114,8 @@ class Header:
 
 
 class Cell:
+    def hasValue(self) -> bool: ...
+
     def getValue(self) -> str:
         """Get the value of the cell as a string.
 
@@ -73,6 +124,10 @@ class Cell:
 
         """
         ...
+
+    def entities(self) -> list[str]: ...
+
+    def getEntitiesAsString(self) -> str: ...
 
 
 class Row:
@@ -191,6 +246,14 @@ class Table:
 
         """
         ...
+
+    def getFirstColumn(self) -> int: ...
+
+    def getFirstRow(self) -> int: ...
+
+    def getLastColumn(self) -> int: ...
+
+    def getLastRow(self) -> int: ...
 
 
 class OptionalTable:
@@ -556,3 +619,7 @@ ModelBuilder = ModelBuilder_  # noqa: F811
 DocumentFactory = DocumentFactory_  # noqa: F811
 DataTable = DataTable_  # noqa: F811
 LayexTableParser = LayexTableParser_  # noqa: F811
+SheetEvent = SheetEvent_  # noqa: F811
+AllTablesExtractedEvent = AllTablesExtractedEvent_  # noqa: F811
+DataTableListBuiltEvent = DataTableListBuiltEvent_  # noqa: F811
+MetaTableListBuiltEvent = MetaTableListBuiltEvent_  # noqa: F811

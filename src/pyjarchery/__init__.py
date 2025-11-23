@@ -9,11 +9,8 @@ allowing for efficient document parsing and data extraction.
 import jpype
 import jpype.imports
 
-from pyarchery.setup import start_java_archery_framework
-
-start_java_archery_framework()
-
-from pyarchery.archery import (
+from . import setup_java
+from .archery import (
     CAMEL,
     INTELLI_EXTRACT,
     INTELLI_LAYOUT,
@@ -27,7 +24,7 @@ from pyarchery.archery import (
     ModelBuilder,
     TableGraph,
 )
-from pyarchery.wrappers import DocumentWrapper
+from .wrappers import DocumentWrapper
 
 
 def model_from_path(path: str) -> ModelBuilder:

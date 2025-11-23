@@ -1,4 +1,4 @@
-import pyarchery
+import pyjarchery as pyarchery
 
 REPO_BASE_URL = "https://raw.githubusercontent.com/RomualdRousseau/Archery/main/archery-models"
 MODEL_NAME = "sales-english"
@@ -20,10 +20,6 @@ def get_model():
     return builder.setEntityList(entities).setPatternMap(patterns).setTableParser(parser).build()
 
 
-def sheet_listener(e):
-    print(e)
-
-
 with pyarchery.load(
     FILE_PATH,
     encoding=FILE_ENCODING,
@@ -33,8 +29,6 @@ with pyarchery.load(
     tag_case="SNAKE",
 ) as doc:
     for sheet in doc.sheets:
-        sheet.add_sheet_listener(sheet_listener)
         table = sheet.table
         if table:
-            df = table.to_pandas().to_markdown()
-            print(df)
+            print(table.to_arrow().to_pandas().to_markdown())
