@@ -1,9 +1,9 @@
-import pyjarchery as pyarchery
+import pyarchery
 
 FILE_PATHS = [
-    "data/document with simple table.csv",
-    "data/document with simple table.xls",
-    "data/document with simple table.xlsx",
+    "examples/data/document with simple table.csv",
+    "examples/data/document with simple table.xls",
+    "examples/data/document with simple table.xlsx",
 ]
 
 for file_path in FILE_PATHS:

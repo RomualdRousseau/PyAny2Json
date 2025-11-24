@@ -30,14 +30,14 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build]
 include = [
-    "src/pyjarchery/**",
-    "src/pyjarchery.libs/**",
+    "src/pyarchery/**",
+    "src/pyarchery.libs/**",
 ]
 
 [tool.hatch.build.targets.wheel]
 packages = [
-  "src/pyjarchery",
-  "src/pyjarchery.libs",
+  "src/pyarchery",
+  "src/pyarchery.libs",
 ]
 
 [tool.ruff]

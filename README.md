@@ -37,15 +37,15 @@ pip install pyjarchery
 Here's a simple example of how to use PyArchery to open a document and extract data from tables:
 
 ```python
-import pyjarchery
-from pyjarchery.archery import defines
+import pyarchery
+from pyarchery.archery import defines
 
 # Path to your document
 file_path = "path/to/your/document.pdf"
 
 # Load the document with intelligent extraction hints
 # This returns a DocumentWrapper
-with pyjarchery.load(
+with pyarchery.load(
     file_path,
     hints=[defines.INTELLI_EXTRACT, defines.INTELLI_LAYOUT]
 ) as doc:

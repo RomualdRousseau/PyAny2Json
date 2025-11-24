@@ -16,7 +16,7 @@ The expected layout of each document is a single header row followed by rows of 
 ### Import the package:
 
 ```python
-import pyjarchery as pyarchery
+import pyarchery
 ```
 
 ## Minimal code

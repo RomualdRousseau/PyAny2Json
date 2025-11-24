@@ -4,9 +4,9 @@ import pandas as pd
 import pyarrow as pa
 import pytest
 
-import pyjarchery as pyarchery
+import pyarchery
 
-DATA_DIR = os.path.join(os.path.dirname(__file__), "../data")
+DATA_DIR = os.path.join(os.path.dirname(__file__), "../examples/data")
 
 
 @pytest.mark.parametrize(
@@ -42,7 +42,7 @@ def test_conversion_simple_table(filename):
         assert arrow_table.num_rows > 0
 
         # Test to_pandas
-        df = table.to_pandas()
+        df = table.to_arrow().to_pandas()
         assert isinstance(df, pd.DataFrame)
         assert not df.empty
         assert len(df) == arrow_table.num_rows

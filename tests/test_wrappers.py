@@ -3,9 +3,9 @@ import os
 import pandas as pd
 import pyarrow as pa
 
-import pyjarchery as pyarchery
+import pyarchery
 
-DATA_DIR = os.path.join(os.path.dirname(__file__), "../data")
+DATA_DIR = os.path.join(os.path.dirname(__file__), "../examples/data")
 CSV_FILE = os.path.join(DATA_DIR, "document with simple table.csv")
 
 
@@ -35,7 +35,7 @@ def test_load_and_wrappers():
         print("Arrow Table Schema:", arrow_table.schema)
 
         # Test to_pandas
-        df = table.to_pandas()
+        df = table.to_arrow().to_pandas()
         assert isinstance(df, pd.DataFrame)
         assert len(df) == len(rows)
 
