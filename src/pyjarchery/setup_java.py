@@ -1,5 +1,6 @@
 import logging
 import os
+import shutil
 from importlib import resources
 
 import jpype
@@ -77,6 +78,11 @@ def start_java_archery_framework():
     logger.info("Start JVM with the following parameters:")
     logger.info(f"Options: {options}")
     logger.info(f"Classpath: {classpath}")
+
+    expected_jar = jars_path / f"archery-{__version__}.jar"
+    if os.path.exists(jars_path) and not os.path.exists(expected_jar):
+        logger.info(f"Version mismatch or missing jar. Expected archery-{__version__}.jar. Reinstalling dependencies.")
+        shutil.rmtree(jars_path)
 
     if not os.path.exists(jars_path):
         install_all_dependencies(jars_path, deps_path)
