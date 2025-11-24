@@ -13,7 +13,7 @@ layout, as seen here:
 ### Import the package:
 
 ```python
-import pyarchery
+import pyjarchery as pyarchery
 ```
 
 ## Minimal code
@@ -95,33 +95,27 @@ with pyarchery.load(
 Finally, we iterate over the sheets, rows and cells and outpout the data on the console:
 
 ```python
-    for sheet in doc.sheets():
-        table = sheet.getTable()
-        if table.isPresent():
-            table = table.get()
-            for header in table.headers():
-                print(header.getTag().getValue(), end=" ")
-            print()
-            for row in table.rows():
-                for cell in row.cells():
-                    print(cell.getValue(), end=" ")
-                print()
+    for sheet in doc.sheets:
+        table = sheet.table
+        if table:
+            print(table.to_arrow().to_pandas().to_markdown())
 ```
 
 ```bash
-a_document_very_important date product_name invoice_date client quantity amount 
-A document very important 2023-02-01 Product 1ml 2023-02-01 AAA 1 100 
-A document very important 2023-02-01 Product 1ml 2023-02-01 BBB 1 100 
-A document very important 2023-02-01 Product 1ml 2023-02-01 BBB 3 300 
-A document very important 2023-02-01 Product 1ml 2023-02-01 AAA 1 100 
-A document very important 2023-02-01 Product 2ml 2023-02-01 AAA 1 100 
-A document very important 2023-02-01 Product 2ml 2023-02-01 BBB 2 200 
-A document very important 2023-02-01 Product 2ml 2023-02-01 CCC 4 400 
-A document very important 2023-02-01 Product 2ml 2023-02-01 DDD 1 100 
-A document very important 2023-02-01 Product 3ml 2023-02-01 AAA 1 100 
-A document very important 2023-02-01 Product 3ml 2023-02-01 CCC 1 100 
-A document very important 2023-02-01 Product 3ml 2023-02-01 AAA 1 100 
-A document very important 2023-02-01 Product 3ml 2023-02-01 DDD 1 100 
+|    | a_document_very_important   | date       | productname   | invoice_date        | client   |   qty |   amount |
+|---:|:----------------------------|:-----------|:--------------|:--------------------|:---------|------:|---------:|
+|  0 | A document very important   | 2023-02-01 | Product 1ml   | 2023-02-01 12:00:00 | AAA      |     1 |      100 |
+|  1 | A document very important   | 2023-02-01 | Product 1ml   | 2023-02-01 12:00:00 | BBB      |     1 |      100 |
+|  2 | A document very important   | 2023-02-01 | Product 1ml   | 2023-02-01 12:00:00 | BBB      |     3 |      300 |
+|  3 | A document very important   | 2023-02-01 | Product 1ml   | 2023-02-01 12:00:00 | AAA      |     1 |      100 |
+|  4 | A document very important   | 2023-02-01 | Product 2ml   | 2023-02-01 12:00:00 | AAA      |     1 |      100 |
+|  5 | A document very important   | 2023-02-01 | Product 2ml   | 2023-02-01 12:00:00 | BBB      |     2 |      200 |
+|  6 | A document very important   | 2023-02-01 | Product 2ml   | 2023-02-01 12:00:00 | CCC      |     4 |      400 |
+|  7 | A document very important   | 2023-02-01 | Product 2ml   | 2023-02-01 12:00:00 | DDD      |     1 |      100 |
+|  8 | A document very important   | 2023-02-01 | Product 3ml   | 2023-02-01 12:00:00 | AAA      |     1 |      100 |
+|  9 | A document very important   | 2023-02-01 | Product 3ml   | 2023-02-01 12:00:00 | CCC      |     1 |      100 |
+| 10 | A document very important   | 2023-02-01 | Product 3ml   | 2023-02-01 12:00:00 | AAA      |     1 |      100 |
+| 11 | A document very important   | 2023-02-01 | Product 3ml   | 2023-02-01 12:00:00 | DDD      |     1 |      100 |
 ```
 
 On this output, we print out the graph of the document built during the parsing and we can see clearly the relation
