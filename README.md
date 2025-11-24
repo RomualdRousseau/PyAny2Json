@@ -3,63 +3,68 @@
 ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 ![Servier Inspired](https://raw.githubusercontent.com/servierhub/.github/main/badges/inspired.svg)
 
-This repository is a binging of Archery for Python language.
+**PyArchery** is a Python binding for the [Java Archery Framework](https://github.com/RomualdRousseau/Archery), enabling powerful semi-structured document processing directly from Python. It leverages [JPype](https://jpype.readthedocs.io/) to bridge Python and Java, providing seamless access to Archery's intelligent extraction, layout analysis, and tag classification capabilities.
 
 ## Description
 
-In today's data-driven landscape, navigating the complexities of semi-structured documents poses a significant challenge
-for organizations. These documents, characterized by diverse formats and a lack of standardization, often require
-specialized skills for effective manipulation and analysis. However, we propose a novel framework to address this
-challenge. By leveraging innovative algorithms and machine learning techniques, [Archery](https://github.com/RomualdRousseau/Archery)
-offers a solution that gives you control over the data extraction process with tweakable and repeatable settings.
-Moreover, by automating the extraction process, it not only saves time but also minimizes errors, particularly beneficial
-for industries dealing with large volumes of such documents. Crucially, this framework integrates with machine learning workflows,
-unlocking new possibilities for data enrichment and predictive modeling. By leveraging determinist algorithms, this framework is perfect
-to prepare your data for training processes in a predictive and reproductible manner. Aligned with the paradigm of data as a service,
-it offers a scalable and efficient means of managing semi-structured data, thereby expanding the toolkit of data services available
-to organizations.
+In today's data-driven landscape, navigating the complexities of semi-structured documents poses a significant challenge. PyArchery brings the robust capabilities of the Archery framework to the Python ecosystem.
 
-Visit our [full documentation](https://romualdrousseau.github.io/PyArchery/) and learn more about how it works, try our
-tutorials and find a full list of plugins and models.
+By leveraging innovative algorithms and machine learning techniques, Archery offers a solution that gives you control over the data extraction process with tweakable and repeatable settings. It automates the extraction process, saving time and minimizing errors, making it ideal for industries dealing with large volumes of documents.
+
+Key features include:
+- **Intelligent Extraction**: Automatically extract structured data from documents.
+- **Layout Analysis**: Understand the physical layout of document elements.
+- **Tag Classification**: Classify document tags using customizable styles (Snake case, Camel case, etc.).
+- **Java Integration**: Direct access to the underlying Java Archery API for advanced usage.
 
 ## Getting Started
 
-### Dependencies
+### Prerequisites
 
-- The Java Developer Kit, version 17.
-- Python 3.8.2 or above.
-- Pip 20.0.2 or above.
-- Poetry 1.7.1 or above.
-- Just 1.24.0 or above.
+- **Java Development Kit (JDK)**: Version 21 or higher is required.
+- **Python**: Version 3.11 or higher.
 
-### Install and setup locally
+### Installation
 
-Run the following command line:
+Install PyArchery using pip:
 
 ```bash
 pip install pyjarchery
 ```
 
-### Run the examples
+### Quick Start
 
-To run the tutorial1:
+Here's a simple example of how to use PyArchery to open a document and extract data from tables:
 
-```bash
-python examples/tutorial1.py
+```python
+import pyjarchery
+from pyjarchery.archery import defines
+
+# Path to your document
+file_path = "path/to/your/document.pdf"
+
+# Load the document with intelligent extraction hints
+# This returns a DocumentWrapper
+with pyjarchery.load(
+    file_path,
+    hints=[defines.INTELLI_EXTRACT, defines.INTELLI_LAYOUT]
+) as doc:
+    # Access sheets using the pythonic wrapper property
+    for sheet in doc.sheets:
+        # Check if sheet has a table
+        if sheet.table:
+            table = sheet.table
+            # Convert to python dictionary
+            data = table.to_pydict()
+            print(f"Extracted data from table: {data.keys()}")
 ```
 
-To run the tutorial2:
+## Documentation
 
-```bash
-python examples/tutorial2.py
-```
+For comprehensive documentation, tutorials, and API references, please visit:
 
-### Documentation
-
-The following links will give you documentation about some background information, takes you through some implementation details,
-and then focuses on step-by-step instructions for getting the most out of Any2Json:
-
-- Using PyArchery: [here](https://romualdrousseau.github.io/PyArchery/).
+- **PyArchery Documentation**: [https://romualdrousseau.github.io/PyArchery/](https://romualdrousseau.github.io/PyArchery/)
+- **Java Archery Framework**: [https://github.com/RomualdRousseau/Archery](https://github.com/RomualdRousseau/Archery)
 
 ## Contribute
 
@@ -69,4 +74,4 @@ Please make sure to update tests as appropriate.
 
 ## Authors
 
-- Romuald Rousseau, romuald.rousseau@servier.com
+- Romuald Rousseau, romualdrousseau@gmail.com

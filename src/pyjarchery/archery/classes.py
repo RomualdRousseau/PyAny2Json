@@ -37,7 +37,14 @@ from com.github.romualdrousseau.archery.parser import (
 
 
 class SheetEvent:
-    def getSource(self) -> Sheet: ...
+    def getSource(self) -> Sheet:
+        """Get the sheet that triggered the event.
+
+        Returns:
+            Sheet: The source sheet.
+
+        """
+        ...
 
 
 class AllTablesExtractedEvent(SheetEvent):
@@ -114,7 +121,14 @@ class Header:
 
 
 class Cell:
-    def hasValue(self) -> bool: ...
+    def hasValue(self) -> bool:
+        """Check if the cell has a value.
+
+        Returns:
+            bool: True if the cell has a value, False otherwise.
+
+        """
+        ...
 
     def getValue(self) -> str:
         """Get the value of the cell as a string.
@@ -125,9 +139,23 @@ class Cell:
         """
         ...
 
-    def entities(self) -> list[str]: ...
+    def entities(self) -> list[str]:
+        """Get the list of entities extracted from this cell.
 
-    def getEntitiesAsString(self) -> str: ...
+        Returns:
+            list[str]: A list of entity strings.
+
+        """
+        ...
+
+    def getEntitiesAsString(self) -> str:
+        """Get the entities as a single concatenated string.
+
+        Returns:
+            str: The entities as a string.
+
+        """
+        ...
 
 
 class Row:
@@ -247,13 +275,41 @@ class Table:
         """
         ...
 
-    def getFirstColumn(self) -> int: ...
+    def getFirstColumn(self) -> int:
+        """Get the index of the first column.
 
-    def getFirstRow(self) -> int: ...
+        Returns:
+            int: The index of the first column.
 
-    def getLastColumn(self) -> int: ...
+        """
+        ...
 
-    def getLastRow(self) -> int: ...
+    def getFirstRow(self) -> int:
+        """Get the index of the first row.
+
+        Returns:
+            int: The index of the first row.
+
+        """
+        ...
+
+    def getLastColumn(self) -> int:
+        """Get the index of the last column.
+
+        Returns:
+            int: The index of the last column.
+
+        """
+        ...
+
+    def getLastRow(self) -> int:
+        """Get the index of the last row.
+
+        Returns:
+            int: The index of the last row.
+
+        """
+        ...
 
 
 class OptionalTable:
@@ -276,7 +332,10 @@ class OptionalTable:
         ...
 
 
-class DataTable(Table): ...
+class DataTable(Table):
+    """Class representing a data table extracted from a document."""
+
+    ...
 
 
 class TableGraph:
@@ -453,10 +512,18 @@ class DocumentFactory:
 
 
 class TableParser:
-    """Base class for table parsers."""
+    """Base class for table parsers.
+
+    Table parsers are responsible for extracting tables from documents based on specific rules or algorithms.
+    """
 
 
 class LayexTableParser(TableParser):
+    """A table parser that uses Layex expressions to define table structures.
+
+    Layex (Layout Expression) is a domain-specific language for describing the layout of tables in documents.
+    """
+
     def __init__(self, meta_layexes: list[str], data_layexes: list[str]):
         """Initialize the LayexTableParser with layex expressions.
 
@@ -468,7 +535,10 @@ class LayexTableParser(TableParser):
 
 
 class TagClassifier:
-    """Class for classifying tags in the document."""
+    """Class for classifying tags in the document.
+
+    Tag classifiers are used to assign semantic tags to headers or other document elements.
+    """
 
     def setTagStyle(self, mode: TagClassifier_.TagStyle) -> TagClassifier:
         """Set the tag style for classification.
@@ -496,7 +566,11 @@ class TagClassifier:
 
 
 class Model:
-    """Class representing the data model."""
+    """Class representing the data model.
+
+    The model defines the structure and rules for extracting data from documents, including entities, patterns, and
+    table definitions.
+    """
 
 
 class ModelBuilder:
