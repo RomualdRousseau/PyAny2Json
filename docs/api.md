@@ -1,13 +1,17 @@
 # API Reference
 
+## Helper Functions
+
+::: pyjarchery
+
 ## Wrappers
 
-::: pyarchery.wrappers
+::: pyjarchery.wrappers
+
+## Core Defines
+
+::: pyjarchery.archery.defines
 
 ## Core Classes
 
-::: pyarchery.archery.classes
-
-## Helper Functions
-
-::: pyarchery
+::: pyjarchery.archery.classes

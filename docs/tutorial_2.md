@@ -35,7 +35,7 @@ The encoding ("UTF-8" here) is used if the encoding could not be detected when l
 ## Load base model
 
 To parse a document, PyArchery needs a model that will contains the parameters required to the parsing. Instead to start
-/from an empty Model (See [Tutorial 10](tutorial_10.md)), we will start from an existing one and we will adapt it for our document. You can find a list and details of all models [here](https://github.com/RomualdRousseau/Archeryarchery-models).
+/from an empty Model, we will start from an existing one and we will adapt it for our document. You can find a list and details of all models [here](https://github.com/RomualdRousseau/Archeryarchery-models).
 
 The base model, we will use, is "sales-english" that has been trained on 200+ english documents containing distributor
 data and with a large range of different layouts.
