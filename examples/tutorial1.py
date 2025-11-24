@@ -1,4 +1,4 @@
-import pyjarchery as pyarchery
+import pyarchery
 
 FILE_PATHS = [
     "data/document with simple table.csv",

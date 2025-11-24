@@ -2,16 +2,16 @@
 
 ## Helper Functions
 
-::: pyjarchery
+::: pyarchery
 
 ## Wrappers
 
-::: pyjarchery.wrappers
+::: pyarchery.wrappers
 
 ## Core Defines
 
-::: pyjarchery.archery.defines
+::: pyarchery.archery.defines
 
 ## Core Classes
 
-::: pyjarchery.archery.classes
+::: pyarchery.archery.classes

@@ -13,7 +13,7 @@ layout, as seen here:
 ### Import the package:
 
 ```python
-import pyjarchery as pyarchery
+import pyarchery
 ```
 
 ## Minimal code

@@ -17,6 +17,6 @@ wheels/
 
 # Other
 saved/
-pyjarchery.jars/
+pyarchery.jars/
 site/
 .env

@@ -1,4 +1,4 @@
-import pyjarchery as pyarchery
+import pyarchery
 
 REPO_BASE_URL = "https://raw.githubusercontent.com/RomualdRousseau/Archery/main/archery-models"
 MODEL_NAME = "sales-english"
