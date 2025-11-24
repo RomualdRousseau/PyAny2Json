@@ -2,7 +2,7 @@ import pyarchery
 
 REPO_BASE_URL = "https://raw.githubusercontent.com/RomualdRousseau/Archery/main/archery-models"
 MODEL_NAME = "sales-english"
-FILE_PATH = "data/document with multiple tables.xlsx"
+FILE_PATH = "examples/data/document with multiple tables.xlsx"
 FILE_ENCODING = "UTF-8"
 
 

@@ -5,7 +5,7 @@ import pyarrow as pa
 
 import pyarchery
 
-DATA_DIR = os.path.join(os.path.dirname(__file__), "../data")
+DATA_DIR = os.path.join(os.path.dirname(__file__), "../examples/data")
 CSV_FILE = os.path.join(DATA_DIR, "document with simple table.csv")
 
 
